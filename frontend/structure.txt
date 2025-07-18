@@ -1,0 +1,38 @@
+src/
+├── admin/
+│   ├── components/            # Admin-specific UI components
+│   ├── hooks/                 # Admin-only hooks
+│   ├── pages/
+│   │   ├── DashboardPage.jsx
+│   │   └── ReportsPage.jsx
+│   └── services/              # API/service layer
+│
+├── user/
+│   ├── components/            # User-specific UI components
+│   ├── hooks/
+│   ├── pages/
+│   │   ├── HomePage.jsx
+│   │   └── ProfilePage.jsx
+│   └── services/
+│
+├── components/                # Shared components (buttons, cards, etc.)
+├── context/                   # Global contexts (e.g. Theme, Auth)
+├── constants/                 # App-wide constants
+├── layouts/
+│   ├── RootLayout.jsx         # Common layout for all routes
+│   ├── AdminLayout.jsx
+│   └── UserLayout.jsx
+│
+├── routes/                    # All route configurations (TanStack Router)
+│   ├── routeTree.js
+│   ├── rootRoute.jsx
+│   ├── admin/
+│   │   ├── dashboardRoute.jsx
+│   │   └── reportsRoute.jsx
+│   └── user/
+│       ├── homeRoute.jsx
+│       └── profileRoute.jsx
+│
+├── utils/                     # Shared utility functions
+├── App.jsx                    # Optional: landing or fallback page
+└── main.jsx                   # Entry point for React + Router
