@@ -1,9 +1,9 @@
 import { createRoute } from "@tanstack/react-router";
-import Login from "@/admin/pages/Login";
 import { rootRoute } from "./rootRoute";
+import UserLayout from "@/layout/UserLayout";
 
-export const loginRoute = createRoute({
+export const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/",
-  component: Login,
+  path: "/home", 
+  component: UserLayout,
 });

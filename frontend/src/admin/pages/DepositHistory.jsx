@@ -32,7 +32,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useQuery } from "@tanstack/react-query";
-import { fetchDeposite } from "../api/depositApi";
+import { fetchDeposite } from "../services/depositApi";
 
 const columns = [
   {

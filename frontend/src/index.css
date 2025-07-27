@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin 'tailwind-scrollbar';
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -120,3 +122,6 @@
   }
 }
 
+@theme {
+  --font-paytone: "Roboto", sans-serif; 
+}

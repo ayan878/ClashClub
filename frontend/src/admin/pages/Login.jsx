@@ -1,8 +1,6 @@
 import { useForm } from "@tanstack/react-form";
-import { zodValidator } from "@tanstack/zod-form-adapter";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
-
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -15,7 +13,6 @@ const loginSchema = z.object({
     ),
 });
 
-
 function Login() {
   const navigate = useNavigate();
 
@@ -23,10 +20,6 @@ function Login() {
     defaultValues: {
       email: "",
       password: "",
-    },
-    validatorAdapter: zodValidator(),
-    validators: {
-      onChange: loginSchema,
     },
     onSubmit: async (values) => {
       console.log(values);
@@ -95,15 +88,15 @@ function Login() {
           className="space-y-6"
           onSubmit={(e) => {
             e.preventDefault();
-            form.handleSubmit(); // This triggers the onSubmit callback
+            form.handleSubmit();
           }}
         >
           {/* Email input with floating label */}
           <form.Field
             name="email"
-            // validators={{
-            //   onBlur: validateEmail,
-            // }}
+            validators={{
+              onBlur: loginSchema.shape.email,
+            }}
             children={(field) => (
               <div className="relative">
                 <input
@@ -128,7 +121,7 @@ function Login() {
                 </label>
                 {field.state.meta.errors?.length > 0 && (
                   <div className="mt-1 text-sm text-red-600">
-                    {field.state.meta.errors[0]}
+                    {field.state.meta.errors[0].message}
                   </div>
                 )}
               </div>
@@ -138,9 +131,9 @@ function Login() {
           {/* Password input with floating label */}
           <form.Field
             name="password"
-            // validators={{
-            //   onBlur: validatePassword,
-            // }}
+            validators={{
+              onBlur: loginSchema.shape.password,
+            }}
             children={(field) => (
               <div className="relative">
                 <input
@@ -165,7 +158,7 @@ function Login() {
                 </label>
                 {field.state.meta.errors?.length > 0 && (
                   <div className="mt-1 text-sm text-red-600">
-                    {field.state.meta.errors[0]}
+                    {field.state.meta.errors[0].message}
                   </div>
                 )}
               </div>
@@ -193,17 +186,17 @@ function Login() {
             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Sign in With Demo
-          </button> 
+          </button>
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{" "}
-          <a
-            href="#"
+          <Link
+            href="/register"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
-            Start a 14 day free trial
-          </a>
+            Sign Up
+          </Link>
         </p>
       </div>
     </div>
