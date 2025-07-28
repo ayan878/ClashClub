@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Paytone+One&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin 'tailwind-scrollbar';
-
 
 @custom-variant dark (&:is(.dark *));
 
@@ -123,5 +122,6 @@
 }
 
 @theme {
-  --font-paytone: "Paytone One", sans-serif; 
+  --font-paytone: "Paytone One", sans-serif;
+  --color-regal-blue: rgb(13, 109, 253, 0.53);
 }

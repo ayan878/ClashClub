@@ -75,10 +75,9 @@ function Wingo() {
     <div className="max-w-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
       <div className="flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
         <div
-          className="w-full flex flex-col gap-4 text-center bg-cover bg-center mb-3 p-4 py-6 text-white bg-indigo-600 rounded"
+          className="w-full flex flex-col gap-4 text-center bg-cover bg-center mb-3 p-4 py-6 text-white bg-regal-blue rounded"
           style={{
             backgroundImage: `url(${walletBg})`,
-            // backgroundColor: "rgba(13, 109, 253, 0.53)",
           }}
         >
           <div className="flex justify-center items-center mb-2">
@@ -114,7 +113,7 @@ function Wingo() {
 
           <button>Details</button>
         </div>
-        <div className="flex justify-between items-center w-full bg-indigo-600 h-24 rounded-lg">
+        <div className="flex justify-between items-center w-full bg-regal-blue h-24 rounded-lg">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
@@ -137,7 +136,7 @@ function Wingo() {
           ))}
         </div>
 
-        <div className="relative flex justify-between gap-3 w-full bg-indigo-800 p-3 rounded-lg text-white">
+        <div className="relative flex justify-between gap-3 w-full bg-regal-blue p-3 rounded-lg text-white">
           <span className="absolute w-4 h-4 -top-2  left-1/2 -translate-x-1/2 bg-[#22275B] rounded-full z-10" />
 
           <span className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 border-dashed border-l-2 border-[#22275B] z-10 h-[80%] m-auto" />
