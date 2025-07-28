@@ -207,32 +207,32 @@ function Wingo() {
           {/* Right section */}
           <div className="flex flex-col items-end text-right gap-1">
             <span className="font-paytone text-xl">Time remaining</span>
-            <div className="flex gap-1 text-3xl font-mono">
-              <span className="bg-indigo-500 rounded p-2 text-center text-white">
+            <div className="flex gap-1 font-mono">
+              <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
                 {minutes[0]}
               </span>
 
-              <span className="bg-indigo-500 rounded p-2 text-center text-white">
+              <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
                 {minutes[1]}
               </span>
-              <span className="text-white flex flex-col justify-center items-center">
+              <span className="text-white flex flex-col justify-center items-center text-3xl">
                 :
               </span>
-              <span className="bg-indigo-500 rounded p-2 text-center text-white">
+              <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
                 {seconds[0]}
               </span>
-              <span className="bg-indigo-500 rounded p-2 text-center text-white">
+              <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
                 {seconds[1]}
               </span>
             </div>
-            <span className="font-paytone text-xl font-outline-2">202534542545</span>
+            <span className="font-paytone text-xl">202534542545</span>
           </div>
         </div>
 
         <div>
-          <div className="flex justify-between gap-2 mb-3">
+          <div className="flex justify-between items-center gap-2 mb-3">
             <NeuButton
-              className="w-28 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+              className="w-32 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
               name="Green"
               onClick={() => {
                 // setShowModal(true);
@@ -241,7 +241,7 @@ function Wingo() {
               }}
             />
             <button
-              className="w-24 text-md border-0 bg-violet-500 text-white p-2 rounded-md"
+              className="w-28 rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
               onClick={() => {
                 // setShowModal(true);
                 // setColor(["#9B48DB"]);
@@ -251,7 +251,7 @@ function Wingo() {
               Violet
             </button>
             <NeuButton
-              className="w-28 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+              className="w-32 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
               name="Red"
               onClick={() => {
                 // setShowModal(true);
