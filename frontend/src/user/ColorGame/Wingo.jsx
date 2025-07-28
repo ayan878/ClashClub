@@ -75,10 +75,10 @@ function Wingo() {
     <div className="max-w-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
       <div className="flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
         <div
-          className="w-full flex flex-col gap-4 text-center bg-cover bg-center mb-3 p-4 py-6 text-white rounded"
+          className="w-full flex flex-col gap-4 text-center bg-cover bg-center mb-3 p-4 py-6 text-white bg-indigo-600 rounded"
           style={{
             backgroundImage: `url(${walletBg})`,
-            backgroundColor: "rgba(13, 109, 253, 0.53)",
+            // backgroundColor: "rgba(13, 109, 253, 0.53)",
           }}
         >
           <div className="flex justify-center items-center mb-2">
@@ -114,7 +114,7 @@ function Wingo() {
 
           <button>Details</button>
         </div>
-        <div className="flex justify-between items-center w-full bg-indigo-800 h-24 rounded-lg">
+        <div className="flex justify-between items-center w-full bg-indigo-600 h-24 rounded-lg">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
