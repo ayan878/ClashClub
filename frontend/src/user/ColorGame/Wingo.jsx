@@ -94,13 +94,13 @@ function Wingo() {
           <div className="flex justify-between gap-3">
             <Link
               to="/withdraw"
-              className="bg-red-500 p-2 font-bold w-1/2 rounded-full text-white text-decoration-none"
+              className="bg-red-500 p-1.5 font-bold w-1/2 rounded-full text-white text-decoration-none"
             >
               Withdraw
             </Link>
             <Link
               to="/deposit"
-              className="bg-green-500 p-2 font-bold w-1/2 rounded-full text-white text-decoration-none"
+              className="bg-green-500 p-1.5 font-bold w-1/2 rounded-full text-white text-decoration-none"
             >
               Deposit
             </Link>
@@ -137,7 +137,13 @@ function Wingo() {
           ))}
         </div>
 
-        <div className="flex justify-between gap-3 w-full bg-indigo-800 p-3 rounded-lg text-white">
+        <div className="relative flex justify-between gap-3 w-full bg-indigo-800 p-3 rounded-lg text-white">
+          <span className="absolute w-4 h-4 -top-2  left-1/2 -translate-x-1/2 bg-[#22275B] rounded-full z-10" />
+
+          <span className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 border-dashed border-l-2 border-[#22275B] z-10 h-[80%] m-auto" />
+
+          <span className="absolute w-4 h-4  left-1/2 -translate-x-1/2 -bottom-2 bg-[#22275B] rounded-full z-10" />
+
           {/* Left section */}
           <div className="flex flex-col gap-2">
             {/* How to play badge + timer */}
@@ -149,7 +155,7 @@ function Wingo() {
             <span className="text-sm">Win Go {timeLabels[activeIndex]}</span>
 
             {/* Ball icons */}
-            <div className="flex gap-2">
+            <div className="flex gap-1 mt-2">
               {ballIcons.map((icon, index) => (
                 <img key={index} src={icon} alt="ball" className="w-7" />
               ))}
@@ -160,24 +166,59 @@ function Wingo() {
           <div className="flex flex-col items-end text-right gap-1">
             <span className="font-paytone text-md">Time remaining</span>
             <div className="flex gap-1 text-xl font-mono">
-              <span className="bg-gradient-to-t from-indigo-800 via-white to-indigo-800 p-1.5 text-center text-indigo-800">
+              <span className="bg-gradient-to-t from-indigo-800 via-indigo-300 to-indigo-800 p-1.5 text-center text-white">
                 {minutes[0]}
               </span>
 
-              <span className="bg-gradient-to-t from-indigo-800 via-white to-indigo-800 p-1.5 text-indigo-800">
+              <span className="bg-gradient-to-t from-indigo-800 via-indigo-300 to-indigo-800 p-1.5 text-white">
                 {minutes[1]}
               </span>
               <span className="text-white flex flex-col justify-center items-center">
                 :
               </span>
-              <span className="bg-gradient-to-t from-indigo-800 via-white to-indigo-800 p-1.5 text-indigo-800">
+              <span className="bg-gradient-to-t from-indigo-800 via-indigo-300 to-indigo-800 p-1.5 text-white">
                 {seconds[0]}
               </span>
-              <span className="bg-gradient-to-t from-indigo-800 via-white to-indigo-800 p-1.5 text-indigo-800">
+              <span className="bg-gradient-to-t from-indigo-800 via-indigo-300 to-indigo-800 p-1.5 text-white">
                 {seconds[1]}
               </span>
             </div>
             <span className="font-paytone text-lg">202534542545</span>
+          </div>
+        </div>
+
+        <div>
+          <div className="flex justify-between gap-2 mb-3">
+            <button
+              className="w-24 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+              onClick={() => {
+                // setShowModal(true);
+                // setColor(["#1AB355"]);
+                // setNumber(null);
+              }}
+            >
+              Green
+            </button>
+            <button
+              className="w-24 text-md border-0 bg-violet-500 text-white p-2 rounded-md"
+              onClick={() => {
+                // setShowModal(true);
+                // setColor(["#9B48DB"]);
+                // setNumber(null);
+              }}
+            >
+              Violet
+            </button>
+            <button
+              className="w-24 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+              onClick={() => {
+                // setShowModal(true);
+                // setColor(["#D23838"]);
+                // setNumber(null);
+              }}
+            >
+              Red
+            </button>
           </div>
         </div>
       </div>

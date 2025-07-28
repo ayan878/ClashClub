@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link,useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -77,6 +77,7 @@ function Login() {
           className="mx-auto h-10 w-auto"
           src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
           alt="Your Company"
+          onClick={() => navigate({ to: "/color-game/wingo-game" })}
         />
         <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
           Sign in to your account
