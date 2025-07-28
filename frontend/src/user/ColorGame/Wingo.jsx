@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronRight, Repeat, Wallet } from "lucide-react";
 import { PiNewspaperClippingFill } from "react-icons/pi";
 import { socket } from "@/socket";
+import NeuButton from "@/components/ui/NeuButton";
 
 const timeLabels = ["30 Sec", "1 Min", "3 Min", "5 Min"];
 const ballIcons = [rvIcon, g3Icon, r4Icon, gvIcon];
@@ -97,25 +98,28 @@ function Wingo() {
           }}
         >
           <div className="flex justify-center items-center mb-2">
-            <span className="font-bold font-paytone mr-2 text-lg">
+            <span className="text-2xl text-regal-blue font-paytone font-outline-2 mr-2">
               ₹ {showBalance}
             </span>
             <Repeat size={20} className="text-white cursor-pointer" />
           </div>
           <div className="flex justify-center align-items-center mb-2 gap-1">
-            <Wallet />
-            <span className="font-paytone">Main Wallet</span>
+            <Wallet className="w-8 h-8" />
+
+            <span className="text-2xl text-regal-blue font-paytone font-outline-2">
+              Main Wallet
+            </span>
           </div>
-          <div className="flex justify-between gap-3">
+          <div className="flex justify-center gap-12">
             <Link
               to="/withdraw"
-              className="bg-red-500 p-2 font-bold w-1/2 rounded-full text-white text-decoration-none"
+              className="bg-red-500 p-2 font-bold rounded-full text-decoration-none text-white w-1/3 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
               Withdraw
             </Link>
             <Link
               to="/deposit"
-              className="bg-green-500 p-2 font-bold w-1/2 rounded-full text-white text-decoration-none"
+              className="bg-green-500 p-2 font-bold rounded-full text-decoration-none text-white w-1/3 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
               Deposit
             </Link>
@@ -221,22 +225,21 @@ function Wingo() {
                 {seconds[1]}
               </span>
             </div>
-            <span className="font-paytone text-xl">202534542545</span>
+            <span className="font-paytone text-xl font-outline-2">202534542545</span>
           </div>
         </div>
 
         <div>
           <div className="flex justify-between gap-2 mb-3">
-            <button
-              className="w-24 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+            <NeuButton
+              className="w-28 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+              name="Green"
               onClick={() => {
                 // setShowModal(true);
                 // setColor(["#1AB355"]);
                 // setNumber(null);
               }}
-            >
-              Green
-            </button>
+            />
             <button
               className="w-24 text-md border-0 bg-violet-500 text-white p-2 rounded-md"
               onClick={() => {
@@ -247,16 +250,15 @@ function Wingo() {
             >
               Violet
             </button>
-            <button
-              className="w-24 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+            <NeuButton
+              className="w-28 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+              name="Red"
               onClick={() => {
                 // setShowModal(true);
                 // setColor(["#D23838"]);
                 // setNumber(null);
               }}
-            >
-              Red
-            </button>
+            />
           </div>
         </div>
       </div>
