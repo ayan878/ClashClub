@@ -182,7 +182,7 @@ function Wingo() {
                 {seconds[1]}
               </span>
             </div>
-            <span className="font-paytone text-2xl">202534542545</span>
+            <span className="font-paytone text-xl">202534542545</span>
           </div>
         </div>
 
