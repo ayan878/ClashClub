@@ -75,7 +75,7 @@ function Wingo() {
     <div className="max-w-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
       <div className="flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
         <div
-          className="w-full flex flex-col gap-4 text-center bg-cover bg-center mb-3 p-4 text-white rounded"
+          className="w-full flex flex-col gap-4 text-center bg-cover bg-center mb-3 p-4 py-6 text-white rounded"
           style={{
             backgroundImage: `url(${walletBg})`,
             backgroundColor: "rgba(13, 109, 253, 0.53)",
@@ -94,13 +94,13 @@ function Wingo() {
           <div className="flex justify-between gap-3">
             <Link
               to="/withdraw"
-              className="bg-red-500 p-1.5 font-bold w-1/2 rounded-full text-white text-decoration-none"
+              className="bg-red-500 p-2 font-bold w-1/2 rounded-full text-white text-decoration-none"
             >
               Withdraw
             </Link>
             <Link
               to="/deposit"
-              className="bg-green-500 p-1.5 font-bold w-1/2 rounded-full text-white text-decoration-none"
+              className="bg-green-500 p-2 font-bold w-1/2 rounded-full text-white text-decoration-none"
             >
               Deposit
             </Link>
@@ -114,13 +114,13 @@ function Wingo() {
 
           <button>Details</button>
         </div>
-        <div className="flex justify-between items-center w-full bg-indigo-800 h-20 rounded-lg">
+        <div className="flex justify-between items-center w-full bg-indigo-800 h-24 rounded-lg">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
               className={`flex flex-col justify-center items-center ${
-                activeIndex === index ? "bg-indigo-600" : ""
-              } w-18 h-full p-4 rounded-lg`}
+                activeIndex === index ? "bg-indigo-500 shadow-card" : ""
+              } w-24 h-full p-5 rounded-lg`}
               onClick={() => setActiveIndex(index)}
             >
               <img
@@ -165,21 +165,21 @@ function Wingo() {
           {/* Right section */}
           <div className="flex flex-col items-end text-right gap-1">
             <span className="font-paytone text-md">Time remaining</span>
-            <div className="flex gap-1 text-xl font-mono">
-              <span className="bg-gradient-to-t from-indigo-800 via-indigo-300 to-indigo-800 p-1.5 text-center text-white">
+            <div className="flex gap-1 text-3xl font-mono">
+              <span className="bg-indigo-500 rounded p-2 text-center text-white">
                 {minutes[0]}
               </span>
 
-              <span className="bg-gradient-to-t from-indigo-800 via-indigo-300 to-indigo-800 p-1.5 text-white">
+              <span className="bg-indigo-500 rounded p-2 text-center text-white">
                 {minutes[1]}
               </span>
               <span className="text-white flex flex-col justify-center items-center">
                 :
               </span>
-              <span className="bg-gradient-to-t from-indigo-800 via-indigo-300 to-indigo-800 p-1.5 text-white">
+              <span className="bg-indigo-500 rounded p-2 text-center text-white">
                 {seconds[0]}
               </span>
-              <span className="bg-gradient-to-t from-indigo-800 via-indigo-300 to-indigo-800 p-1.5 text-white">
+              <span className="bg-indigo-500 rounded p-2 text-center text-white">
                 {seconds[1]}
               </span>
             </div>
