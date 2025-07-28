@@ -25,6 +25,13 @@ import { socket } from "@/socket";
 const timeLabels = ["30 Sec", "1 Min", "3 Min", "5 Min"];
 const ballIcons = [rvIcon, g3Icon, r4Icon, gvIcon];
 
+const messages = [
+  "Hello, withdrawals typically take 1–2 hours to process.",
+  "We appreciate your patience.",
+  "Please contact support if delays persist.",
+  "We appreciate your patience.",
+];
+
 function Wingo() {
   const [showBalance, setShowBalance] = useState(35469);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,14 +46,23 @@ function Wingo() {
 
   const rotateRef = useRef(null);
 
+  const [angle, setAngle] = useState(0);
+
   useEffect(() => {
     const timer = setInterval(() => {
-      if (rotateRef.current) {
-        rotateRef.current.style.transform = "rotateX(180deg)";
-      }
-    }, 3000);
-    return () => clearTimeout(timer);
+      setAngle((prev) => prev + 90);
+    }, 2000);
+
+    return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (rotateRef.current) {
+      rotateRef.current.style.transform = `rotateX(${angle}deg)`;
+      rotateRef.current.style.transition = "transform 1s ease-in-out";
+      rotateRef.current.style.transformStyle = "preserve-3d";
+    }
+  }, [angle]);
 
   const formatTimeInDigits = (totalSecounds) => {
     const minutes = Math.floor(totalSecounds / 60);
@@ -105,13 +121,36 @@ function Wingo() {
             </Link>
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <p ref={rotateRef} className="text-xs font-paytone">
-            Hello, withdrawals typically take 1–2 hours to process. We
-            appreciate your patience.
-          </p>
+        <div className="w-full flex justify-between items-center text-white">
+          <div
+            className="w-64 h-10 overflow-hidden relative"
+            style={{ perspective: "1000px" }}
+          >
+            <div
+              ref={rotateRef}
+              className="absolute inset-0 transform-style-preserve-3d"
+              style={{
+                transformOrigin: "center center",
+              }}
+            >
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className="absolute w-full h-full px-2 text-xs font-paytone bg-regal-blue rounded-lg text-white flex items-center justify-center"
+                  style={{
+                    transform: `rotateX(${i * 90}deg) translateZ(20px)`,
+                    backfaceVisibility: "hidden",
+                  }}
+                >
+                  {msg}
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <button>Details</button>
+          <button className="rounded-full bg-fuchsia-700 py-2 px-4">
+            Details
+          </button>
         </div>
         <div className="flex justify-between items-center w-full bg-regal-blue h-24 rounded-lg">
           {Array.from({ length: 4 }).map((_, index) => (
