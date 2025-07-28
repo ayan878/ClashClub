@@ -101,10 +101,10 @@ function Wingo() {
             <span className="text-2xl text-regal-blue font-paytone font-outline-2 mr-2">
               ₹ {showBalance}
             </span>
-            <Repeat size={20} className="text-white cursor-pointer" />
+            <Repeat size={20} className="text-yellow-300 cursor-pointer" />
           </div>
           <div className="flex justify-center align-items-center mb-2 gap-1">
-            <Wallet className="w-8 h-8" />
+            <Wallet className="w-8 h-8 text-yellow-300" />
 
             <span className="text-2xl text-regal-blue font-paytone font-outline-2">
               Main Wallet
