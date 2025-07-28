@@ -156,14 +156,14 @@ function Wingo() {
             {/* Ball icons */}
             <div className="flex gap-1 mt-2">
               {ballIcons.map((icon, index) => (
-                <img key={index} src={icon} alt="ball" className="w-7" />
+                <img key={index} src={icon} alt="ball" className="max-w-10" />
               ))}
             </div>
           </div>
 
           {/* Right section */}
           <div className="flex flex-col items-end text-right gap-1">
-            <span className="font-paytone text-md">Time remaining</span>
+            <span className="font-paytone text-xl">Time remaining</span>
             <div className="flex gap-1 text-3xl font-mono">
               <span className="bg-indigo-500 rounded p-2 text-center text-white">
                 {minutes[0]}
@@ -182,7 +182,7 @@ function Wingo() {
                 {seconds[1]}
               </span>
             </div>
-            <span className="font-paytone text-lg">202534542545</span>
+            <span className="font-paytone text-2xl">202534542545</span>
           </div>
         </div>
 
