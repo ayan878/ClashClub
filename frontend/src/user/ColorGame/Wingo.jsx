@@ -72,10 +72,10 @@ function Wingo() {
   console.log(timers);
 
   return (
-    <div className="max-w-xs flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
+    <div className="max-w-sm flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
       <div className="flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
         <div
-          className="w-full text-center bg-cover bg-center mb-3 p-4 text-white rounded"
+          className="w-full flex flex-col gap-4 text-center bg-cover bg-center mb-3 p-4 text-white rounded"
           style={{
             backgroundImage: `url(${walletBg})`,
             backgroundColor: "rgba(13, 109, 253, 0.53)",
