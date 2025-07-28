@@ -156,7 +156,7 @@ function Wingo() {
             {/* Ball icons */}
             <div className="flex gap-1 mt-2">
               {ballIcons.map((icon, index) => (
-                <img key={index} src={icon} alt="ball" className="max-w-10" />
+                <img key={index} src={icon} alt="ball" className="max-w-11" />
               ))}
             </div>
           </div>
