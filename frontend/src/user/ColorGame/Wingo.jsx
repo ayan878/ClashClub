@@ -97,7 +97,7 @@ function Wingo() {
           }}
         >
           <div className="flex justify-center items-center mb-2">
-            <span className="font-bold font-paytone mr-2 text-md">
+            <span className="font-bold font-paytone mr-2 text-lg">
               ₹ {showBalance}
             </span>
             <Repeat size={20} className="text-white cursor-pointer" />
@@ -195,7 +195,7 @@ function Wingo() {
             {/* Ball icons */}
             <div className="flex gap-1 mt-2">
               {ballIcons.map((icon, index) => (
-                <img key={index} src={icon} alt="ball" className="max-w-11" />
+                <img key={index} src={icon} alt="ball" className="max-w-10" />
               ))}
             </div>
           </div>
