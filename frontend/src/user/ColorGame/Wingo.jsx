@@ -316,7 +316,7 @@ function Wingo() {
               />
             ))}
           </div> */}
-          <div className="grid [grid-template-columns:repeat(5,clamp(4.5rem,6.5vw,5.125rem))] gap-2 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
+          <div className="grid [grid-template-columns:repeat(5,clamp(4.5rem,6.5vw,5rem))] gap-2 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
             {numberBallIcons.map((num, idx) => (
               <img
                 key={num}
