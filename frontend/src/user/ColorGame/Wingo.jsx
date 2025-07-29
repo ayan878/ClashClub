@@ -125,28 +125,28 @@ function Wingo() {
           }}
         >
           <div className="flex justify-center items-center mb-2">
-            <span className="text-2xl text-regal-blue font-paytone font-outline-2 mr-2">
+            <span className="text-2xl text-white font-paytone mr-2">
               ₹ {showBalance}
             </span>
-            <Repeat size={20} className="text-yellow-300 cursor-pointer" />
+            <Repeat size={20} className="cursor-pointer" />
           </div>
           <div className="flex justify-center align-items-center mb-2 gap-1">
-            <Wallet className="w-8 h-8 text-yellow-300" />
+            <Wallet className="w-8 h-8" />
 
-            <span className="text-2xl text-regal-blue font-paytone font-outline-2">
+            <span className="text-2xl font-paytone text-white">
               Main Wallet
             </span>
           </div>
-          <div className="min-w-60 flex justify-center items-center gap-6">
+          <div className="min-w-64 flex justify-center items-center gap-6">
             <Link
               to="/withdraw"
-              className="bg-red-500 p-2 font-bold rounded-full text-decoration-none text-white w-4/5 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
+              className="bg-red-500 px-4 py-2 font-bold rounded-full text-decoration-none text-white w-4/5 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
               Withdraw
             </Link>
             <Link
               to="/deposit"
-              className="bg-green-500 p-2 font-bold rounded-full text-decoration-none text-white w-4/5 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
+              className="bg-green-500 px-4 py-2 font-bold rounded-full text-decoration-none text-white w-4/5 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
               Deposit
             </Link>
@@ -297,7 +297,7 @@ function Wingo() {
           </div>
 
           {/* numbers balls */}
-          <div className="grid [grid-template-columns:repeat(5,3rem)] gap-2 mb-3 rounded-xl p-3 bg-regal-blue justify-center shadow-accent-foreground">
+          <div className="grid [grid-template-columns:repeat(5,3.5rem)] gap-1 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
             {numberBallIcons.map((num, idx) => (
               <img
                 key={num}
