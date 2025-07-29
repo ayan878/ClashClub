@@ -330,7 +330,7 @@ function Wingo() {
           <div className="flex justify-between items-center mb-3 flex-wrap">
             <button
               // className="m-1 border border-red-500 rounded-md p-2 text-white text-danger bg-transparent"
-              className="rounded-md h-10 bg-gradient-to-br from-blue-400 to-blue-700 px-3 py-1 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-red-700 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
+              className="rounded-md h-10 bg-gradient-to-br from-blue-400 to-blue-700 ml-1.5 px-3 py-1 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-red-700 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
               onClick={() => setStartToGenrateRandomNumber(true)}
             >
               Random
