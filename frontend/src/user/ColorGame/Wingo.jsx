@@ -193,7 +193,7 @@ function Wingo() {
                 activeIndex === index
                   ? "bg-gradient-to-b to-[#97D7F9] from-indigo-500 shadow-card"
                   : ""
-              } max-w-24 max-h-full p-5 rounded-lg`}
+              } max-w-24 max-h-full p-6 rounded-lg`}
               onClick={() => setActiveIndex(index)}
             >
               <img
@@ -202,7 +202,7 @@ function Wingo() {
                 }`}
                 alt="clock"
               />
-              <span className="text-white text-[clamp(0.650rem,3vw,0.850rem)] font-paytone flex flex-col items-center">
+              <span className="text-white text-[clamp(0.650rem,2vw,0.750rem)] font-paytone flex flex-col items-center">
                 <span className="font-paytone">Win Go</span>
                 <span className="font-paytone">{timeLabels[index]}</span>
               </span>
