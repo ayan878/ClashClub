@@ -22,6 +22,7 @@ import { ChevronRight, Repeat, Wallet } from "lucide-react";
 import { PiNewspaperClippingFill } from "react-icons/pi";
 import { socket } from "@/socket";
 import NeuButton from "@/components/ui/NeuButton";
+import WingoGameModal from "../components/WingoGameModal";
 
 const timeLabels = ["30 Sec", "1 Min", "3 Min", "5 Min"];
 const ballIcons = [rvIcon, g3Icon, r4Icon, gvIcon];
@@ -51,6 +52,10 @@ const labels = ["x1", "x5", "x10", "x100"];
 function Wingo() {
   const [showBalance, setShowBalance] = useState(35469);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [startToGenerateNumber, setStartToGenrateRandomNumber] =
+    useState(false);
+  const [randomNumber, setRandomNumber] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const durations = [30, 60, 180, 300];
   const [timers, setTimers] = useState({
@@ -102,6 +107,30 @@ function Wingo() {
   }, []);
 
   console.log(timers);
+
+  useEffect(() => {
+    if (!startToGenerateNumber) return;
+
+    const generateRandomNumber = () => Math.floor(Math.random() * 10);
+
+    // Start generating every 200ms
+    const interval = setInterval(() => {
+      const number = generateRandomNumber();
+      setRandomNumber(number);
+    }, 200);
+
+    // Stop after 3 seconds
+    const stopTimeout = setTimeout(() => {
+      clearInterval(interval);
+      setStartToGenrateRandomNumber(false);
+      setShowModal(true);
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(stopTimeout);
+    };
+  }, [startToGenerateNumber]);
 
   return (
     // <div className="w-full-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
@@ -301,36 +330,21 @@ function Wingo() {
           </div>
 
           {/* numbers balls */}
-          {/* <div className="grid [grid-template-columns:repeat(5,3.5rem)] gap-1 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
+          <div className="grid grid-cols-5 grid-rows-2 gap-2 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
             {numberBallIcons.map((num, idx) => (
               <img
                 key={num}
                 src={num}
                 alt={`num-${idx}`}
-                className="w-[clamp(6.75rem,6.5vw,5.125rem)] h-16"
-                // className={`rounded-circle border ${
-                //   randomNumber === idx ? "animate-scale" : ""
-                // }`}
-                // style={{ width: "3rem", height: "3rem" }}
-                // onClick={() => handleNumberBalls(idx)}
-              />
-            ))}
-          </div> */}
-          <div className="grid [grid-template-columns:repeat(5,clamp(4.5rem,6.5vw,5rem))] gap-2 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
-            {numberBallIcons.map((num, idx) => (
-              <img
-                key={num}
-                src={num}
-                alt={`num-${idx}`}
-                className="w-full h-18"
+                className={`h-auto min-w-8 transition-transform duration-300 ease-in-out 
+  ${idx === randomNumber ? "scale-125" : "scale-100"}`}
               />
             ))}
           </div>
 
-          <div className="flex justify-between items-center mb-3 flex-wrap">
+          <div className="flex justify-between gap-3 items-center mb-3 flex-wrap">
             <button
-              // className="m-1 border border-red-500 rounded-md p-2 text-white text-danger bg-transparent"
-              className="rounded-md h-10 bg-gradient-to-br from-blue-400 to-blue-700 ml-1.5 px-3 py-1 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-red-700 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
+              className="rounded-md flex-1 h-10 bg-gradient-to-br from-blue-400 to-blue-700 ml-1.5 px-3 py-1 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-red-700 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
               onClick={() => setStartToGenrateRandomNumber(true)}
             >
               Random
@@ -372,6 +386,24 @@ function Wingo() {
             </button>
           </div>
         </div>
+
+        {/* Tabs */}
+        <div className="w-full flex justify-between items-center">
+          <button
+            className="bg-blue-600 text-white text-lg border-none px-3 py-2 rounded-md"
+            // onClick={() => setActiveTab("history")}
+          >
+            Game History
+          </button>
+          <button
+            className="text-white text-lg px-3 py-2 border-none w-1/2 rounded-md"
+            style={{ backgroundColor: "rgba(29, 24, 97, 0.67)" }}
+            // onClick={() => setActiveTab("bets")}
+          >
+            My Bets
+          </button>
+        </div>
+        <WingoGameModal setShowModal={setShowModal} />
       </div>
     </div>
   );
