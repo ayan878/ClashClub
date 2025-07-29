@@ -202,7 +202,7 @@ function Wingo() {
                 }`}
                 alt="clock"
               />
-              <span className="text-white text-[10px] font-paytone flex flex-col items-center">
+              <span className="text-white text-[clamp(0.650rem,3vw,0.850rem)] font-paytone flex flex-col items-center">
                 <span className="font-paytone">Win Go</span>
                 <span className="font-paytone">{timeLabels[index]}</span>
               </span>
@@ -237,7 +237,9 @@ function Wingo() {
 
           {/* Right section */}
           <div className="flex flex-col items-end text-right gap-1">
-            <span className="font-paytone text-lg">Time remaining</span>
+            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)]">
+              Time remaining
+            </span>
             <div className="flex gap-1 font-mono">
               <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
                 {minutes[0]}
@@ -256,7 +258,9 @@ function Wingo() {
                 {seconds[1]}
               </span>
             </div>
-            <span className="font-paytone text-lg">202534542545</span>
+            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)]">
+              202534542545
+            </span>
           </div>
         </div>
 
@@ -267,7 +271,7 @@ function Wingo() {
           {/* game control btns */}
           <div className="w-full flex justify-between items-center gap-2 mb-3">
             <NeuButton
-              className="w-28 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+              className="w-32 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
               name="Green"
               onClick={() => {
                 // setShowModal(true);
@@ -276,7 +280,7 @@ function Wingo() {
               }}
             />
             <button
-              className="flex-1 rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
+              className="w-full rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
               onClick={() => {
                 // setShowModal(true);
                 // setColor(["#9B48DB"]);
@@ -286,7 +290,7 @@ function Wingo() {
               Violet
             </button>
             <NeuButton
-              className="w-28 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+              className="w-32 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
               name="Red"
               onClick={() => {
                 // setShowModal(true);
@@ -297,20 +301,32 @@ function Wingo() {
           </div>
 
           {/* numbers balls */}
-          <div className="grid [grid-template-columns:repeat(5,3.5rem)] gap-1 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
+          {/* <div className="grid [grid-template-columns:repeat(5,3.5rem)] gap-1 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
             {numberBallIcons.map((num, idx) => (
               <img
                 key={num}
                 src={num}
                 alt={`num-${idx}`}
+                className="w-[clamp(6.75rem,6.5vw,5.125rem)] h-16"
                 // className={`rounded-circle border ${
                 //   randomNumber === idx ? "animate-scale" : ""
                 // }`}
-                style={{ width: "3rem", height: "3rem" }}
+                // style={{ width: "3rem", height: "3rem" }}
                 // onClick={() => handleNumberBalls(idx)}
               />
             ))}
+          </div> */}
+          <div className="grid [grid-template-columns:repeat(5,clamp(4.5rem,6.5vw,5.125rem))] gap-2 mb-3 rounded-xl p-4 bg-regal-blue justify-center shadow-accent-foreground">
+            {numberBallIcons.map((num, idx) => (
+              <img
+                key={num}
+                src={num}
+                alt={`num-${idx}`}
+                className="w-full h-18"
+              />
+            ))}
           </div>
+
           <div className="flex justify-between items-center mb-3 flex-wrap">
             <button
               // className="m-1 border border-red-500 rounded-md p-2 text-white text-danger bg-transparent"
