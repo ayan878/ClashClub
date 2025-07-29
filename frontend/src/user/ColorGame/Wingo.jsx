@@ -89,10 +89,22 @@ function Wingo() {
   console.log(timers);
 
   return (
-    <div className="max-w-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
+    // <div className="w-full flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
+    <div className="w-full max-w-screen-sm mx-auto p-4 overflow-y-auto bg-[#22275B]">
       <div className="flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
+        {/* balance section */}
         <div
-          className="w-full flex flex-col gap-4 text-center bg-cover bg-center mb-3 p-4 py-6 text-white bg-regal-blue rounded shadow-2xl shadow-accent-foreground"
+          className="w-full
+    flex flex-col 
+    items-center justify-between
+    gap-4 
+    text-center
+    bg-cover bg-center 
+    mb-3 p-4 mt-4
+    text-white 
+    bg-regal-blue 
+    rounded shadow-2xl shadow-accent-foreground
+  "
           style={{
             backgroundImage: `url(${walletBg})`,
           }}
@@ -110,16 +122,16 @@ function Wingo() {
               Main Wallet
             </span>
           </div>
-          <div className="flex justify-center gap-12">
+          <div className="min-w-60 flex justify-center items-center gap-6">
             <Link
               to="/withdraw"
-              className="bg-red-500 p-2 font-bold rounded-full text-decoration-none text-white w-1/3 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
+              className="bg-red-500 p-2 font-bold rounded-full text-decoration-none text-white w-4/5 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
               Withdraw
             </Link>
             <Link
               to="/deposit"
-              className="bg-green-500 p-2 font-bold rounded-full text-decoration-none text-white w-1/3 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
+              className="bg-green-500 p-2 font-bold rounded-full text-decoration-none text-white w-4/5 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
               Deposit
             </Link>
@@ -156,13 +168,17 @@ function Wingo() {
             Details
           </button>
         </div>
+
+        {/* timer */}
         <div className="flex justify-between items-center w-full bg-regal-blue h-24 rounded-lg shadow-2xl shadow-accent-foreground">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
               className={`flex flex-col justify-center items-center ${
-                activeIndex === index ? "bg-indigo-500 shadow-card" : ""
-              } w-24 h-full p-5 rounded-lg`}
+                activeIndex === index
+                  ? "bg-gradient-to-b to-[#97D7F9] from-indigo-500 shadow-card"
+                  : ""
+              } max-w-24 max-h-full p-5 rounded-lg`}
               onClick={() => setActiveIndex(index)}
             >
               <img
@@ -171,7 +187,7 @@ function Wingo() {
                 }`}
                 alt="clock"
               />
-              <span className="text-white text-xs font-paytone flex flex-col items-center">
+              <span className="text-white text-[10px] font-paytone flex flex-col items-center">
                 <span className="font-paytone">Win Go</span>
                 <span className="font-paytone">{timeLabels[index]}</span>
               </span>
@@ -199,14 +215,14 @@ function Wingo() {
             {/* Ball icons */}
             <div className="flex gap-1 mt-2">
               {ballIcons.map((icon, index) => (
-                <img key={index} src={icon} alt="ball" className="max-w-10" />
+                <img key={index} src={icon} alt="ball" className="max-w-8" />
               ))}
             </div>
           </div>
 
           {/* Right section */}
           <div className="flex flex-col items-end text-right gap-1">
-            <span className="font-paytone text-xl">Time remaining</span>
+            <span className="font-paytone text-lg">Time remaining</span>
             <div className="flex gap-1 font-mono">
               <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
                 {minutes[0]}
@@ -225,41 +241,39 @@ function Wingo() {
                 {seconds[1]}
               </span>
             </div>
-            <span className="font-paytone text-xl">202534542545</span>
+            <span className="font-paytone text-lg">202534542545</span>
           </div>
         </div>
 
-        <div>
-          <div className="flex justify-between items-center gap-2 mb-3">
-            <NeuButton
-              className="w-32 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
-              name="Green"
-              onClick={() => {
-                // setShowModal(true);
-                // setColor(["#1AB355"]);
-                // setNumber(null);
-              }}
-            />
-            <button
-              className="w-28 rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
-              onClick={() => {
-                // setShowModal(true);
-                // setColor(["#9B48DB"]);
-                // setNumber(null);
-              }}
-            >
-              Violet
-            </button>
-            <NeuButton
-              className="w-32 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
-              name="Red"
-              onClick={() => {
-                // setShowModal(true);
-                // setColor(["#D23838"]);
-                // setNumber(null);
-              }}
-            />
-          </div>
+        <div className="w-full flex justify-between items-center gap-2 mb-3">
+          <NeuButton
+            className="w-28 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+            name="Green"
+            onClick={() => {
+              // setShowModal(true);
+              // setColor(["#1AB355"]);
+              // setNumber(null);
+            }}
+          />
+          <button
+            className="flex-1 rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
+            onClick={() => {
+              // setShowModal(true);
+              // setColor(["#9B48DB"]);
+              // setNumber(null);
+            }}
+          >
+            Violet
+          </button>
+          <NeuButton
+            className="w-28 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+            name="Red"
+            onClick={() => {
+              // setShowModal(true);
+              // setColor(["#D23838"]);
+              // setNumber(null);
+            }}
+          />
         </div>
       </div>
     </div>
