@@ -261,7 +261,7 @@ function Wingo() {
         </div>
 
         <div
-          className="relative flex flex-col justify-between mb-3 rounded-2xl p-2"
+          className="relative w-full flex flex-col justify-between mb-3 rounded-2xl p-2"
           style={{ backgroundColor: "#2B3270" }}
         >
           {/* game control btns */}
