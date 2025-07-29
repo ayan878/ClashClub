@@ -33,6 +33,21 @@ const messages = [
   "We appreciate your patience.",
 ];
 
+const numberBallIcons = [
+  g1Icon, // 1
+  r2Icon, // 2
+  g3Icon, // 3
+  r4Icon, // 4
+  gvIcon, // 5
+  r6Icon, // 6
+  g7Icon, // 7
+  r8Icon, // 8
+  g9Icon, // 9
+  rvIcon, // 0 (treated as 10th position)
+];
+
+const labels = ["x1", "x5", "x10", "x100"];
+
 function Wingo() {
   const [showBalance, setShowBalance] = useState(35469);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -89,7 +104,7 @@ function Wingo() {
   console.log(timers);
 
   return (
-    // <div className="w-full flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
+    // <div className="w-full-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
     <div className="w-full max-w-screen-sm mx-auto p-4 overflow-y-auto bg-[#22275B]">
       <div className="flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
         {/* balance section */}
@@ -245,35 +260,101 @@ function Wingo() {
           </div>
         </div>
 
-        <div className="w-full flex justify-between items-center gap-2 mb-3">
-          <NeuButton
-            className="w-28 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
-            name="Green"
-            onClick={() => {
-              // setShowModal(true);
-              // setColor(["#1AB355"]);
-              // setNumber(null);
-            }}
-          />
-          <button
-            className="flex-1 rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
-            onClick={() => {
-              // setShowModal(true);
-              // setColor(["#9B48DB"]);
-              // setNumber(null);
-            }}
-          >
-            Violet
-          </button>
-          <NeuButton
-            className="w-28 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
-            name="Red"
-            onClick={() => {
-              // setShowModal(true);
-              // setColor(["#D23838"]);
-              // setNumber(null);
-            }}
-          />
+        <div
+          className="relative flex flex-col justify-between mb-3 rounded-2xl p-2"
+          style={{ backgroundColor: "#2B3270" }}
+        >
+          {/* game control btns */}
+          <div className="w-full flex justify-between items-center gap-2 mb-3">
+            <NeuButton
+              className="w-28 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+              name="Green"
+              onClick={() => {
+                // setShowModal(true);
+                // setColor(["#1AB355"]);
+                // setNumber(null);
+              }}
+            />
+            <button
+              className="flex-1 rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
+              onClick={() => {
+                // setShowModal(true);
+                // setColor(["#9B48DB"]);
+                // setNumber(null);
+              }}
+            >
+              Violet
+            </button>
+            <NeuButton
+              className="w-28 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+              name="Red"
+              onClick={() => {
+                // setShowModal(true);
+                // setColor(["#D23838"]);
+                // setNumber(null);
+              }}
+            />
+          </div>
+
+          {/* numbers balls */}
+          <div className="grid [grid-template-columns:repeat(5,3rem)] gap-2 mb-3 rounded-xl p-3 bg-regal-blue justify-center shadow-accent-foreground">
+            {numberBallIcons.map((num, idx) => (
+              <img
+                key={num}
+                src={num}
+                alt={`num-${idx}`}
+                // className={`rounded-circle border ${
+                //   randomNumber === idx ? "animate-scale" : ""
+                // }`}
+                style={{ width: "3rem", height: "3rem" }}
+                // onClick={() => handleNumberBalls(idx)}
+              />
+            ))}
+          </div>
+          <div className="flex justify-between items-center mb-3 flex-wrap">
+            <button
+              // className="m-1 border border-red-500 rounded-md p-2 text-white text-danger bg-transparent"
+              className="rounded-md h-10 bg-gradient-to-br from-blue-400 to-blue-700 px-3 py-1 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-red-700 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
+              onClick={() => setStartToGenrateRandomNumber(true)}
+            >
+              Random
+            </button>
+            <div>
+              {labels.map((label, index) => (
+                <button
+                  key={index}
+                  className={`m-1 p-2 text-white rounded-md border-0 ${
+                    activeIndex === index
+                      ? "bg-green-500 outline-2 outline-regal-blue"
+                      : "outline-2"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex border-0 rounded-full overflow-hidden">
+            <button
+              className="text-white text-md w-full p-2 border-0 bg-gradient-to-b from-yellow-700 via-yellow-400 to-yellow-700"
+              // onClick={() => {
+              //   setShowModal(true);
+              //   setColor(["#DD9138"]);
+              // }}
+            >
+              Big
+            </button>
+            <button
+              className="text-white text-md w-full p-2 border-0 bg-gradient-to-b from-indigo-950 via-indigo-400 to-indigo-950"
+              // onClick={() => {
+              //   setShowModal(true);
+              //   setColor(["#5088D3"]);
+              // }}
+            >
+              Small
+            </button>
+          </div>
         </div>
       </div>
     </div>
