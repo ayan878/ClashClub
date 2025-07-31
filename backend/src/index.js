@@ -43,6 +43,9 @@ app.use(morgan("dev"));
 app.use(router);
 app.use(otpRouter);
 
+// Serve static frontend for renderer
+const frontendPath = path.join(__dirname, "../frontend/dist"); // or "../client/build"
+app.use(express.static(frontendPath));
 // Define route to fetch users with total_money >= 100
 app.get("/", async (req, res) => {
   try {
