@@ -44,7 +44,7 @@ app.use(router);
 app.use(otpRouter);
 
 // Define route to fetch users with total_money >= 100
-app.get("/users", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const [results] = await connection.query(
       "SELECT * FROM users WHERE total_money >= 100"
