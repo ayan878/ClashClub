@@ -9,12 +9,6 @@ import { Server } from "socket.io";
 import morgan from "morgan";
 import otpRouter from "./routes/otpSendRoute.js";
 import { socketHandlers } from "./socket.js";
-import path from "path";
-import { fileURLToPath } from "url";
-
-// Handle __dirname in ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -49,9 +43,7 @@ app.use(morgan("dev"));
 app.use(router);
 app.use(otpRouter);
 
-// Serve static frontend for renderer
-const frontendPath = path.join(__dirname, "../../frontend/dist");
-app.use(express.static(frontendPath));
+
 // Define route to fetch users with total_money >= 100
 app.get("/", async (req, res) => {
   try {

@@ -18,7 +18,7 @@ import g9Icon from "../../assets/png/g9.png";
 
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ChevronRight, Repeat, Wallet } from "lucide-react";
+import { Repeat, Wallet } from "lucide-react";
 import { PiNewspaperClippingFill } from "react-icons/pi";
 import { socket } from "@/socket";
 import NeuButton from "@/components/ui/NeuButton";

@@ -1,7 +1,7 @@
 
 
 const durations = [30, 60, 180, 300];
-const timers = {}; // Store timeLeft and period for each duration
+const timers = {}; 
 
 export const socketHandlers = (io) => {
   // Initialize timer states
