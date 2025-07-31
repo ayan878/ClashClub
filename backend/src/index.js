@@ -9,6 +9,7 @@ import { Server } from "socket.io";
 import morgan from "morgan";
 import otpRouter from "./routes/otpSendRoute.js";
 import { socketHandlers } from "./socket.js";
+import path from "path";
 
 dotenv.config();
 
