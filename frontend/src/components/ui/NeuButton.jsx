@@ -1,11 +1,12 @@
 import React from "react";
 import { useAnimate } from "framer-motion";
 
-
-const NeuButton = ({ name,className }) => {
+const NeuButton = ({ name, className, setShowModal, setColor }) => {
   const [scope, animate] = useAnimate();
 
   const handleClick = () => {
+    setShowModal(true);
+    setColor(()=> name==="Red" ? ["#D23838"]:["#1AB355"]);
     animate([
       [".button", { scale: 1, boxShadow: "none" }, { duration: 0.1 }],
       [".button", { rotate: 0 }, { duration: 0.1, at: "<" }],

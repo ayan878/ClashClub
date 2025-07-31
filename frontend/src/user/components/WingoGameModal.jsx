@@ -37,7 +37,7 @@ const WingoGameModal = ({
   }
 
   if (!isOpen) return null;
-
+  
   const handleBetSubmit = async (
     gameTime,
     definedColor,
@@ -79,11 +79,15 @@ const WingoGameModal = ({
 
   return (
     <div
-      className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-75 z-50 rounded-md"
-      style={{ borderRadius: "inherit" }}
+      className="fixed inset-0 flex justify-center items-end bg-transparent  z-10 rounded-md"
+      style={{
+        borderRadius: "inherit",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+      }}
+      onClick={onClose}
     >
       <div
-        className="w-full max-w-md mx-3 text-white rounded-t-lg overflow-hidden"
+        className="relative z-50 border-2 w-full max-w-md mx-3 text-white rounded-t-lg overflow-hidden"
         style={{ maxHeight: "90%", backgroundColor: "#1e1b2e" }}
       >
         {/* Header */}

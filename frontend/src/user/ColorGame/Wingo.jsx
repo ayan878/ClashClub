@@ -23,6 +23,7 @@ import { PiNewspaperClippingFill } from "react-icons/pi";
 import { socket } from "@/socket";
 import NeuButton from "@/components/ui/NeuButton";
 import WingoGameModal from "../components/WingoGameModal";
+import TimerModal from "../components/TimerModal";
 
 const timeLabels = ["30 Sec", "1 Min", "3 Min", "5 Min"];
 const ballIcons = [rvIcon, g3Icon, r4Icon, gvIcon];
@@ -35,6 +36,7 @@ const messages = [
 ];
 
 const numberBallIcons = [
+  rvIcon, // 0
   g1Icon, // 1
   r2Icon, // 2
   g3Icon, // 3
@@ -44,7 +46,6 @@ const numberBallIcons = [
   g7Icon, // 7
   r8Icon, // 8
   g9Icon, // 9
-  rvIcon, // 0 (treated as 10th position)
 ];
 
 const labels = ["x1", "x5", "x10", "x100"];
@@ -56,13 +57,16 @@ function Wingo() {
     useState(false);
   const [randomNumber, setRandomNumber] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [color, setColor] = useState([]);
+  const [number, setNumber] = useState(null);
 
   const durations = [30, 60, 180, 300];
+
   const [timers, setTimers] = useState({
-    30: null,
-    60: null,
-    180: null,
-    300: null,
+    30: { time: null, period: null },
+    60: { time: null, period: null },
+    180: { time: null, period: null },
+    300: { time: null, period: null },
   });
 
   const rotateRef = useRef(null);
@@ -96,13 +100,21 @@ function Wingo() {
   };
 
   const { minutes, seconds } = formatTimeInDigits(
-    timers[durations[activeIndex]] || 0
+    timers[durations[activeIndex]]?.time || 0
   );
 
+  const period = timers[durations[activeIndex]].period;
+  console.log("period", period);
+
   useEffect(() => {
-    socket.emit("start_timer", {});
-    socket.on("timer_tick", ({ duration, time }) => {
-      setTimers((prev) => ({ ...prev, [duration]: time }));
+    socket.on("timer_tick", ({ duration, time, period }) => {
+      setTimers((prev) => ({
+        ...prev,
+        [duration]: {
+          time,
+          period: period ?? prev[duration].period,
+        },
+      }));
     });
   }, []);
 
@@ -132,10 +144,39 @@ function Wingo() {
     };
   }, [startToGenerateNumber]);
 
+  useEffect(() => {
+    if (seconds <= 5) setShowModal(false);
+  }, [seconds]);
+
+  const handleNumberBalls = (idx) => {
+    setShowModal(true);
+    if (idx !== number) setNumber(idx);
+    if (idx === 0) {
+      setColor(["#D23838", "#9B48DB"]);
+    } else if (idx === 5) {
+      setColor(["#1AB355", "#9B48DB"]);
+    } else if (idx === 1 || idx === 3 || idx === 7 || idx === 9) {
+      setColor(["#1AB355"]);
+    } else if (idx === 2 || idx === 4 || idx === 6 || idx === 8) {
+      setColor(["#D23838"]);
+    }
+  };
+
   return (
     // <div className="w-full-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
     <div className="w-full max-w-screen-sm mx-auto p-4 overflow-y-auto bg-[#22275B]">
-      <div className="flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
+      <div className="relative flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
+        <WingoGameModal
+          isOpen={showModal}
+          timer={seconds}
+          onClose={() => setShowModal(false)}
+          color={color}
+          number={number}
+          // title={winGo[activeGoIndex].title}
+          // gameTime={winGo[activeGoIndex].duration}
+          // period={periodNumber}
+          setShowModal={setShowModal}
+        />
         {/* balance section */}
         <div
           className="w-full
@@ -242,7 +283,7 @@ function Wingo() {
         <div className="relative flex justify-between gap-3 w-full bg-regal-blue p-3 rounded-lg text-white shadow-2xl shadow-accent-foreground">
           <span className="absolute w-4 h-4 -top-2  left-1/2 -translate-x-1/2 bg-[#151C3B] rounded-full z-10" />
 
-          <span className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 border-dashed border-l-2 border-[#151C3B] z-10 h-[80%] m-auto" />
+          <span className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 border-dashed border-l-2 border-[#151C3B] h-[80%] m-auto" />
 
           <span className="absolute w-4 h-4  left-1/2 -translate-x-1/2 -bottom-2 bg-[#151C3B] rounded-full z-10" />
 
@@ -288,7 +329,7 @@ function Wingo() {
               </span>
             </div>
             <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)]">
-              202534542545
+              {period}
             </span>
           </div>
         </div>
@@ -297,22 +338,26 @@ function Wingo() {
           className="relative w-full flex flex-col justify-between mb-3 rounded-2xl p-2"
           style={{ backgroundColor: "#2B3270" }}
         >
+          <TimerModal seconds={seconds} />
           {/* game control btns */}
           <div className="w-full flex justify-between items-center gap-2 mb-3">
             <NeuButton
               className="w-32 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
               name="Green"
-              onClick={() => {
-                // setShowModal(true);
-                // setColor(["#1AB355"]);
-                // setNumber(null);
-              }}
+              setShowModal={setShowModal}
+              setColor={setColor}
+              // onClick={() => {
+              //   setShowModal(true);
+              //   alert("showModal")
+              //   setColor(["#1AB355"]);
+              //   setNumber(null);
+              // }}
             />
             <button
               className="w-full rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
               onClick={() => {
-                // setShowModal(true);
-                // setColor(["#9B48DB"]);
+                setShowModal(true);
+                setColor(["#9B48DB"]);
                 // setNumber(null);
               }}
             >
@@ -321,11 +366,13 @@ function Wingo() {
             <NeuButton
               className="w-32 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
               name="Red"
-              onClick={() => {
-                // setShowModal(true);
-                // setColor(["#D23838"]);
-                // setNumber(null);
-              }}
+              setShowModal={setShowModal}
+              setColor={setColor}
+              // onClick={() => {
+              //   setShowModal(true);
+              //   setColor(["#D23838"]);
+              //   setNumber(null);
+              // }}
             />
           </div>
 
@@ -338,6 +385,9 @@ function Wingo() {
                 alt={`num-${idx}`}
                 className={`h-auto min-w-8 transition-transform duration-300 ease-in-out 
   ${idx === randomNumber ? "scale-125" : "scale-100"}`}
+                onClick={() => {
+                  handleNumberBalls(idx);
+                }}
               />
             ))}
           </div>
@@ -403,7 +453,6 @@ function Wingo() {
             My Bets
           </button>
         </div>
-        <WingoGameModal setShowModal={setShowModal} />
       </div>
     </div>
   );
