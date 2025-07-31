@@ -2,7 +2,9 @@ import { io } from "socket.io-client";
 
 // export const socket = io("http://localhost:3000");
 
-const socketUrl =
-//   import.meta.env.VITE_SOCKET_URL || 
-  import.meta.env.VITE_PRODUCTION_URL;
-export const socket = io(socketUrl);
+// const socketUrl =
+// //   import.meta.env.VITE_SOCKET_URL || 
+//   import.meta.env.VITE_PRODUCTION_URL;
+// export const socket = io(socketUrl);
+
+export const socket = io("https://clash-club-backend.vercel.app");
