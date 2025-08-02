@@ -1,9 +1,11 @@
-const TimerModal = ({ seconds }) => {
-  if (seconds > 5) return null;
+const TimerModal = ({ seconds,activeIndex,setActiveIndex }) => {
+
+  
+  if (seconds > 5 ) return null;
 
   return (
     <div
-      className="absolute start-0 top-0 w-full h-full flex justify-center items-center"
+      className="absolute start-0 top-0 w-full h-full flex justify-center items-center rounded-lg"
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.75)",
         zIndex: 10,

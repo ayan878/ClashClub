@@ -1,5 +1,6 @@
 import { socket } from "@/socket";
 import { useState } from "react";
+import { toast } from "react-toastify";
 // import axios from "axios";
 // import { toast } from "react-toastify";
 // const base_url = process.env.REACT_APP_API_URL;
@@ -10,8 +11,9 @@ const WingoBetModal = ({
   ballColor,
   ballNumber,
   title,
-  gameTime,
+  gameType,
   period,
+  // size,
   setShowModal,
 }) => {
   const [balance, setBalance] = useState(1);
@@ -23,7 +25,8 @@ const WingoBetModal = ({
   const multipliers = [1, 5, 10, 20, 50, 100];
   const totalAmount = balance * quantity * multiplier;
 
-  const size = ballColor === "#5088D3" ? "Small" : ballColor === "#DD9138" ? "Big" : "";
+  const size =
+    ballColor === "#5088D3" ? "Small" : ballColor === "#DD9138" ? "Big" : "";
 
   let definedColor = "";
   if (!ballNumber) {
@@ -40,57 +43,64 @@ const WingoBetModal = ({
   if (!isOpen) return null;
 
   const handleBetSubmit = async (
-    gameTime,
+    gameType,
     definedColor,
     number,
     size,
     totalAmount,
     period
   ) => {
+    if (totalAmount <= 0) {
+      return alert("Please enter a valid amount");
+    }
 
-      if (totalAmount <= 0) {
-        return alert("Please enter a valid amount");
-      }
+    console.log("Sending bet:", {
+      period,
+      gameType,
+      number: number || null,
+      color: definedColor || null,
+      size: size || null,
+      totalAmount,
+    });
 
-      // socket.emit("wingo-bet", {
-      //   totalAmount,
-      //   period,
-      //   socketId: socket.id
-      // });
+
+    if (!number && !definedColor && !size) {
+      return alert("Please bet on at least one: Number, Color, or Size");
+    }
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/post/wingoGameBet`,
-        {
-          period,
-          game: gameTime,
-          number,
-          color: definedColor,
-          size,
-          betAmount: totalAmount,
+      const response = await fetch("http://localhost:3000/api/wingoGameBet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.data.success) {
+        body: JSON.stringify({
+          period,
+          gameType,
+          number: number || null,
+          color: definedColor || null,
+          size: size || null,
+          totalAmount,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast.success("Bet placed successfully!");
         setShowModal(false);
       } else {
-        toast.error(response.data.data.message);
+        toast.error(data?.message || "Bet submission failed");
       }
     } catch (error) {
-      console.error("❌ Error submitting game number:", error);
+      console.error("❌ Error submitting bet:", error);
       toast.error("Something went wrong.");
     }
   };
 
-
   return (
     <div
-      className="fixed inset-0 flex justify-center items-end bg-transparent  z-10 rounded-md"
+      className="fixed inset-0 flex justify-center items-end bg-transparent  z-10 rounded-md drop-shadow-[1px_4px_0_#0e2a47]"
       style={{
         borderRadius: "inherit",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -98,8 +108,13 @@ const WingoBetModal = ({
       onClick={onClose}
     >
       <div
-        className="relative z-50 border-2 w-full max-w-md mx-3 text-white rounded-t-lg overflow-hidden"
-        style={{ maxHeight: "90%", backgroundColor: "#1e1b2e" }}
+        className="relative z-50 border-t-[1.5rem] border-r-8 border-l-8 w-full max-w-lg mx-3 text-white rounded-t-[5rem] overflow-hidden"
+        style={{
+          maxHeight: "90%",
+          backgroundColor: "#1e1b2e",
+          boxShadow:
+            "inset 0 2px 2px rgba(0, 255, 255, 0.5), inset 0 -2px 2px rgba(0, 255, 255, 0.5)",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -116,8 +131,10 @@ const WingoBetModal = ({
                   : `linear-gradient(45deg, ${ballColor[0]}, #9B48DB)`,
             }}
           >
-            <h3 className="text-lg font-semibold">{title}</h3>
-            <p className="text-sm">
+            <h3 className="text-lg font-semibold drop-shadow-[1px_4px_0_#0e2a47]">
+              {title}
+            </h3>
+            <p className="text-sm drop-shadow-[1px_1px_0_#0e2a47]">
               Select{" "}
               {ballNumber || ballNumber === 0
                 ? ballNumber
@@ -136,7 +153,7 @@ const WingoBetModal = ({
 
         {/* Balance */}
         <div className="p-3">
-          <div className="flex justify-between items-center flex-wrap">
+          <div className="flex justify-between items-center flex-wrap drop-shadow-[1px_1px_0_#0e2a47]">
             <p className="mb-2 text-xs">Balance</p>
             <div className="flex gap-1 flex-wrap justify-end">
               {balanceOptions.map((val) => (
@@ -159,7 +176,7 @@ const WingoBetModal = ({
         </div>
 
         {/* Quantity */}
-        <div className="p-3 flex justify-between items-center flex-wrap">
+        <div className="p-3 flex justify-between items-center flex-wrap drop-shadow-[1px_1px_0_#0e2a47]">
           <p className="mb-2 text-xs">Quantity</p>
           <div className="flex items-center gap-1">
             <button
@@ -168,13 +185,16 @@ const WingoBetModal = ({
             >
               −
             </button>
-            <span className="flex items-center justify-center w-16 h-8 bg-[#374992] rounded text-sm">
+            <span className="flex items-center justify-center w-16 h-8 bg-[#374992] rounded text-sm drop-shadow-[1px_2px_0_#374992]">
               {quantity}
             </span>
             <button
               className="border-0 rounded text-white w-8 h-8 text-lg"
               onClick={() => setQuantity((prev) => prev + 1)}
-              style={{ backgroundColor: ballColor[0] }}
+              style={{
+                backgroundColor: ballColor[0],
+                filter: `drop-shadow(1px 1px 0 ${ballColor[0]})`,
+              }}
             >
               +
             </button>
@@ -187,7 +207,7 @@ const WingoBetModal = ({
             <button
               key={x}
               onClick={() => setMultiplier(x)}
-              className={`rounded px-3 py-1 text-xs min-w-[3rem] ${
+              className={`rounded px-3 py-1 text-xs min-w-[3rem] drop-shadow-[1px_2px_0_#374992] ${
                 multiplier === x ? "text-white" : "text-gray-300"
               }`}
               style={{
@@ -228,7 +248,7 @@ const WingoBetModal = ({
             style={{ backgroundColor: ballColor[0] }}
             onClick={() =>
               handleBetSubmit(
-                gameTime,
+                gameType,
                 definedColor,
                 ballNumber,
                 size,
