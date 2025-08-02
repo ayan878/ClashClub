@@ -1,7 +1,7 @@
 import express from "express";
 import connection from "./config/connectDB.js";
 import dotenv from "dotenv";
-import router from "./routes/depositHistoryRoute.js";
+
 
 import cors from "cors";
 import http from "http";
@@ -9,6 +9,7 @@ import { Server } from "socket.io";
 import morgan from "morgan";
 import otpRouter from "./routes/otpSendRoute.js";
 import { socketHandlers } from "./socket.js";
+import router from "./routes/IndexRoutes.js";
 
 dotenv.config();
 
@@ -40,7 +41,7 @@ socketHandlers(io);
 
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(router);
+app.use("/api", router);
 app.use(otpRouter);
 
 
