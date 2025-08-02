@@ -1,13 +1,14 @@
+import { socket } from "@/socket";
 import { useState } from "react";
 // import axios from "axios";
 // import { toast } from "react-toastify";
 // const base_url = process.env.REACT_APP_API_URL;
 
-const WingoGameModal = ({
+const WingoBetModal = ({
   isOpen,
   onClose,
-  color,
-  number,
+  ballColor,
+  ballNumber,
   title,
   gameTime,
   period,
@@ -22,22 +23,22 @@ const WingoGameModal = ({
   const multipliers = [1, 5, 10, 20, 50, 100];
   const totalAmount = balance * quantity * multiplier;
 
-  const size = color === "#5088D3" ? "Small" : color === "#DD9138" ? "Big" : "";
+  const size = ballColor === "#5088D3" ? "Small" : ballColor === "#DD9138" ? "Big" : "";
 
   let definedColor = "";
-  if (!number) {
+  if (!ballNumber) {
     definedColor =
-      color === "#1AB355"
+      ballColor === "#1AB355"
         ? "Green"
-        : color === "#9B48DB"
+        : ballColor === "#9B48DB"
         ? "Voilet"
-        : color === "#D23838"
+        : ballColor === "#D23838"
         ? "Red"
         : "";
   }
 
   if (!isOpen) return null;
-  
+
   const handleBetSubmit = async (
     gameTime,
     definedColor,
@@ -47,35 +48,45 @@ const WingoGameModal = ({
     period
   ) => {
 
-    // try {
-    //   const response = await axios.post(
-    //     `${base_url}/api/post/wingoGameBet`,
-    //     {
-    //       period,
-    //       game: gameTime,
-    //       number,
-    //       color: definedColor,
-    //       size,
-    //       betAmount: totalAmount,
-    //     },
-    //     {
-    //       withCredentials: true,
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
+      if (totalAmount <= 0) {
+        return alert("Please enter a valid amount");
+      }
 
-    //   if (response.data.success) {
-    //     setShowModal(false);
-    //   } else {
-    //     toast.error(response.data.data.message);
-    //   }
-    // } catch (error) {
-    //   console.error("❌ Error submitting game number:", error);
-    //   toast.error("Something went wrong.");
-    // }
+      // socket.emit("wingo-bet", {
+      //   totalAmount,
+      //   period,
+      //   socketId: socket.id
+      // });
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/post/wingoGameBet`,
+        {
+          period,
+          game: gameTime,
+          number,
+          color: definedColor,
+          size,
+          betAmount: totalAmount,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.data.success) {
+        setShowModal(false);
+      } else {
+        toast.error(response.data.data.message);
+      }
+    } catch (error) {
+      console.error("❌ Error submitting game number:", error);
+      toast.error("Something went wrong.");
+    }
   };
+
 
   return (
     <div
@@ -89,6 +100,7 @@ const WingoGameModal = ({
       <div
         className="relative z-50 border-2 w-full max-w-md mx-3 text-white rounded-t-lg overflow-hidden"
         style={{ maxHeight: "90%", backgroundColor: "#1e1b2e" }}
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="relative" style={{ backgroundColor: "#2B3270" }}>
@@ -97,25 +109,25 @@ const WingoGameModal = ({
             style={{
               clipPath: "polygon(100% 0, 100% 67%, 50% 95%, 0 67%, 0 0)",
               background:
-                color.length === 1
-                  ? color[0]
-                  : color.length === 2 && color[0] === "#1AB355"
-                  ? `linear-gradient(45deg, ${color[0]}, #9B48DB)`
-                  : `linear-gradient(45deg, ${color[0]}, #9B48DB)`,
+                ballColor.length === 1
+                  ? ballColor[0]
+                  : ballColor.length === 2 && ballColor[0] === "#1AB355"
+                  ? `linear-gradient(45deg, ${ballColor[0]}, #9B48DB)`
+                  : `linear-gradient(45deg, ${ballColor[0]}, #9B48DB)`,
             }}
           >
             <h3 className="text-lg font-semibold">{title}</h3>
             <p className="text-sm">
               Select{" "}
-              {number || number === 0
-                ? number
-                : color === "#1AB355"
+              {ballNumber || ballNumber === 0
+                ? ballNumber
+                : ballColor === "#1AB355"
                 ? "Green"
-                : color === "#9B48DB"
+                : ballColor === "#9B48DB"
                 ? "Voilet"
-                : color === "#5088D3"
+                : ballColor === "#5088D3"
                 ? "Small"
-                : color === "#DD9138"
+                : ballColor === "#DD9138"
                 ? "Big"
                 : "Red"}
             </p>
@@ -135,7 +147,7 @@ const WingoGameModal = ({
                     balance === val ? "text-white" : "text-gray-300"
                   }`}
                   style={{
-                    backgroundColor: balance === val ? color[0] : "#2B3270",
+                    backgroundColor: balance === val ? ballColor[0] : "#2B3270",
                     borderRadius: "6px",
                   }}
                 >
@@ -162,7 +174,7 @@ const WingoGameModal = ({
             <button
               className="border-0 rounded text-white w-8 h-8 text-lg"
               onClick={() => setQuantity((prev) => prev + 1)}
-              style={{ backgroundColor: color[0] }}
+              style={{ backgroundColor: ballColor[0] }}
             >
               +
             </button>
@@ -179,7 +191,7 @@ const WingoGameModal = ({
                 multiplier === x ? "text-white" : "text-gray-300"
               }`}
               style={{
-                backgroundColor: multiplier === x ? color[0] : "#2B3270",
+                backgroundColor: multiplier === x ? ballColor[0] : "#2B3270",
                 border: "none",
                 borderRadius: "6px",
               }}
@@ -213,12 +225,12 @@ const WingoGameModal = ({
           </button>
           <button
             className="w-3/4 text-white py-2 rounded"
-            style={{ backgroundColor: color[0] }}
+            style={{ backgroundColor: ballColor[0] }}
             onClick={() =>
               handleBetSubmit(
                 gameTime,
                 definedColor,
-                number,
+                ballNumber,
                 size,
                 totalAmount,
                 period
@@ -233,4 +245,4 @@ const WingoGameModal = ({
   );
 };
 
-export default WingoGameModal;
+export default WingoBetModal;
