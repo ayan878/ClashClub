@@ -383,7 +383,7 @@ function Wingo() {
 
           {/* Right section */}
           <div className="flex flex-col items-end text-right gap-1 drop-shadow-[1px_2px_0_#0e2a47]">
-            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)] drop-shadow-[1px_1px_0_grey]">
+            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1rem)] drop-shadow-[1px_1px_0_grey]">
               Time remaining
             </span>
             <div className="flex gap-1 font-mono">
@@ -404,7 +404,7 @@ function Wingo() {
                 {seconds[1]}
               </span>
             </div>
-            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)] drop-shadow-[1px_1px_0_grey]">
+            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1rem)] drop-shadow-[1px_1px_0_grey]">
               {period}
             </span>
           </div>
@@ -431,7 +431,7 @@ function Wingo() {
           {/* game control btns */}
           <div className="w-full flex justify-between items-center gap-2 mb-3">
             <NeuButton
-              className="w-32 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+              className="w-24 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
               name="Green"
               setShowModal={setShowModal}
               setBallColor={setBallColor}
@@ -443,7 +443,7 @@ function Wingo() {
               // }}
             />
             <button
-              className="w-full rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
+              className="flex-1 rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
               onClick={() => {
                 setShowModal(true);
                 setBallColor(["#9B48DB"]);
@@ -453,7 +453,7 @@ function Wingo() {
               Violet
             </button>
             <NeuButton
-              className="w-32 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+              className="w-24 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
               name="Red"
               setShowModal={setShowModal}
               setBallColor={setBallColor}
