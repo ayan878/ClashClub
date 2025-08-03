@@ -380,7 +380,7 @@ function Wingo() {
 
           {/* Right section */}
           <div className="flex flex-col items-end text-right gap-1 drop-shadow-[1px_2px_0_#0e2a47]">
-            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)] drop-shadow-[1px_2px_0_grey]">
+            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)] drop-shadow-[1px_1px_0_grey]">
               Time remaining
             </span>
             <div className="flex gap-1 font-mono">
@@ -401,7 +401,7 @@ function Wingo() {
                 {seconds[1]}
               </span>
             </div>
-            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)] drop-shadow-[1px_2px_0_#0e2a47]">
+            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)] drop-shadow-[1px_1px_0_grey]">
               {period}
             </span>
           </div>
