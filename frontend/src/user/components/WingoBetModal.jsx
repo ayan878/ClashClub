@@ -1,4 +1,4 @@
-import  socket  from "@/socket";
+import socket from "@/socket";
 import { useState } from "react";
 import { toast } from "react-toastify";
 // import axios from "axios";
@@ -10,11 +10,12 @@ const WingoBetModal = ({
   onClose,
   ballColor,
   ballNumber,
-  title,
   period,
+  title,
   duration,
   setShowModal,
 }) => {
+
   const [balance, setBalance] = useState(1);
   const [quantity, setQuantity] = useState(1);
   const [multiplier, setMultiplier] = useState(1);
@@ -23,6 +24,10 @@ const WingoBetModal = ({
   const balanceOptions = [1, 10, 100, 1000];
   const multipliers = [1, 5, 10, 20, 50, 100];
   const totalAmount = balance * quantity * multiplier;
+
+  if (!isOpen) return null;
+
+  console.log(ballColor); //it run constineously
 
   const size =
     ballColor === "#5088D3" ? "Small" : ballColor === "#DD9138" ? "Big" : "";
@@ -39,13 +44,7 @@ const WingoBetModal = ({
         : "";
   }
 
-    const gameType = `Wingo-${
-      duration / 60 === 0.5
-        ? "30"
-        : duration / 60
-    }`;
-    
-  if (!isOpen) return null;
+  const gameType = `Wingo-${duration / 60 === 0.5 ? "30" : duration / 60}`;
 
   const handleBetSubmit = async (
     gameType,

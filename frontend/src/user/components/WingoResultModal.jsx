@@ -11,21 +11,26 @@ const WingoResultModal = ({ duration }) => {
   const [size, setSize] = useState(null);
 
   useEffect(() => {
-    socket.on("wingo-result", (result) => {
+    const listener = (result) => {
       console.log("result:", result);
       setNumber(result.number);
       setColor(result.color);
       setSize(result.size);
-      setPeriod(result.period);    
+      setPeriod(result.period);
       setIsOpen(result.game === duration);
-    });
+    };
+
+    socket.on("wingo-result", listener);
 
     if (!isOpen) return;
     const timer = setTimeout(() => {
       setIsOpen(false);
     }, 2000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      socket.off('wingo-result',listener)
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;

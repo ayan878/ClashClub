@@ -61,7 +61,6 @@ function Wingo() {
   const [showModal, setShowModal] = useState(false);
   const [ballColor, setBallColor] = useState([]);
   const [ballNumber, setBallNumber] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
 
   const durations = [30, 60, 180, 300];
 
@@ -110,27 +109,26 @@ function Wingo() {
   // extract all the value in single line of code
   const { number, color, size, period } = timers[durations[activeIndex]] ?? {};
 
-  // console.log(gameType);
-
   useEffect(() => {
-    socket.on(
-      "timer_tick",
-      ({ duration, time, period, number, color, size }) => {
-        setTimers((prev) => ({
-          ...prev,
-          [duration]: {
-            time,
-            period: period ?? prev[duration].period,
-            number: number ?? prev[duration]?.number,
-            color: color ?? prev[duration]?.color,
-            size: size ?? prev[duration]?.size,
-          },
-        }));
-      }
-    );
+    const listener = ({ duration, time, period, number, color, size }) => {
+      setTimers((prev) => ({
+        ...prev,
+        [duration]: {
+          time,
+          period: period ?? prev[duration].period,
+          number: number ?? prev[duration]?.number,
+          color: color ?? prev[duration]?.color,
+          size: size ?? prev[duration]?.size,
+        },
+      }));
+    };
+
+    socket.on("timer_tick", listener);
+
+    return () => {
+      socket.off("timer_tick", listener);
+    };
   }, []);
-
-
 
   useEffect(() => {
     if (!startToGenerateNumber) return;
@@ -159,6 +157,7 @@ function Wingo() {
   useEffect(() => {
     if (seconds <= 5) setShowModal(false);
   }, [seconds]);
+
 
   const handleNumberBalls = (idx) => {
     setShowModal(true);
@@ -202,18 +201,18 @@ function Wingo() {
       ? "drop-shadow-[-1px_0px_0_#0e2a47]"
       : "drop-shadow-[1px_0px_0_#0e2a47]";
 
-
-
+      console.log('Ayan');
+      
   return (
     // <div className="w-full-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
 
     <div className="relative w-full max-w-screen-sm mx-auto p-4 overflow-y-auto bg-[#22275B]">
-      <WingoResultModal duration={durations[activeIndex]}/>
+      <WingoResultModal duration={durations[activeIndex]} />
 
       <div className="relative flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
         <WingoBetModal
           isOpen={showModal}
-          timer={seconds}
+          // timer={seconds}
           onClose={() => setShowModal(false)}
           ballColor={ballColor}
           ballNumber={ballNumber}
@@ -222,24 +221,6 @@ function Wingo() {
           duration={durations[activeIndex]}
           setShowModal={setShowModal}
         />
-        {/* balance section */}
-        {/* <div
-          className="w-full
-    flex flex-col 
-    items-center justify-between
-    gap-4 
-    text-center
-    bg-cover bg-center 
-    mb-3 p-4 mt-4
-    text-white 
-    bg-regal-blue 
-                  border-[#97D7F] shadow-inner
-    rounded border-8  
-  "
-          style={{
-            backgroundImage: `url(${walletBg})`,
-          }}
-        > */}
         <div
           className="w-full flex flex-col items-center justify-between gap-4 text-center bg-cover bg-center mb-3 p-4 mt-4 text-white bg-regal-blue  border-[#8BC2FC] rounded-4xl border-[1rem]"
           style={{
@@ -249,8 +230,8 @@ function Wingo() {
             backgroundImage: `url(${walletBg})`,
           }}
         >
-          <div className="flex justify-center items-center mb-2 drop-shadow-[1px_2px_0_#0e2a47]">
-            <span className="text-2xl text-white font-paytone mr-2 drop-shadow-[1px_2px_0_#0e2a47]">
+          <div className="flex justify-center items-center mb-2 drop-shadow-[1px_2px_0_grey]">
+            <span className="text-2xl text-white font-paytone mr-2">
               ₹ {showBalance}
             </span>
             <Repeat size={20} className="cursor-pointer" />
@@ -258,7 +239,7 @@ function Wingo() {
           <div className="flex justify-center align-items-center mb-2 gap-1 drop-shadow-[1px_2px_0_#0e2a47]">
             <Wallet className="w-8 h-8 drop-shadow-[1px_2px_0_#0e2a47]" />
 
-            <span className="text-2xl font-paytone text-white drop-shadow-[1px_2px_0_#0e2a47]">
+            <span className="text-2xl font-paytone text-white drop-shadow-[1px_2px_0_grey]">
               Main Wallet
             </span>
           </div>
@@ -292,7 +273,7 @@ function Wingo() {
               {messages.map((msg, i) => (
                 <div
                   key={i}
-                  className="absolute w-full h-full px-2 text-xs font-paytone bg-regal-blue rounded-lg text-white flex items-center justify-center"
+                  className="absolute w-full h-full px-2 text-xs font-payton rounded-lg text-white flex items-center justify-center"
                   style={{
                     transform: `rotateX(${i * 90}deg) translateZ(20px)`,
                     backfaceVisibility: "hidden",
@@ -308,64 +289,22 @@ function Wingo() {
             Details
           </button>
         </div>
-        {/* timer
-        <div
-          className="flex justify-between items-center w-full bg-regal-blue h-28 rounded-4xl shadow-2xl shadow-accent-foreground border-8"
-          style={{
-            boxShadow:
-              "inset 0 2px 2px rgba(0, 255, 255, 0.5), inset 0 -2px 2px rgba(0, 255, 255, 0.5)",
-          }}
-        >
-          {Array.from({ length: 4 }).map((_, index) => (
-            <div
-              key={index}
-              className={`flex flex-col justify-center items-center ${
-                activeIndex === index
-                  ? "bg-gradient-to-b to-[#97D7F9] from-indigo-500 shadow-card"
-                  : ""
-              } max-w-24 max-h-full p-6 rounded-3xl`}
-              onClick={() => setActiveIndex(index)}
-            >
-              <img
-                className="drop-shadow-lg"
-                src={`${
-                  activeIndex === index ? clockLightIcon : clockDeepIcon
-                }`}
-                alt="clock"
-              />
-              <span className="text-white text-[clamp(0.650rem,2vw,0.750rem)] font-paytone flex flex-col items-center">
-                <span className="font-paytone">Win Go</span>
-                <span className="font-paytone">{timeLabels[index]}</span>
-              </span>
-            </div>
-          ))}
-        </div> */}
 
         <div
           ref={containerRef}
-          className="relative flex justify-between items-center w-full bg-regal-blue h-28 rounded-4xl shadow-2xl shadow-accent-foreground border-8 drop-shadow-[1px_2px_0_#0e2a47] overflow-clip"
+          className="relative flex justify-between items-center w-full bg-regal-blue h-32 rounded-4xl shadow-2xl shadow-accent-foreground border-8 drop-shadow-[1px_2px_0_#0e2a47] overflow-clip"
           style={{
             boxShadow:
               "inset 0 2px 0px rgba(0, 255, 255, 0.5), inset 0 -2px 0px rgba(0, 255, 255, 0.5)",
           }}
         >
-          {/* <motion.div
-            className="absolute top-0 bottom-0 rounded-3xl z-0 drop-shadow-[1px_1px_0_#0e2a47]"
-            initial={false}
-            animate={{ x: activeIndex * itemWidth }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            style={{
-              width: 100,
-              background: "linear-gradient(to top, #97D7F9, #4F46E5)",
-            }}
-          /> */}
           <motion.div
             className={`absolute top-0 bottom-0 rounded-3xl z-0 ${shadowClass}`}
             initial={false}
-            animate={{ x: activeIndex * itemWidth }}
+            animate={{ x: activeIndex * itemWidth - 8 }}
             transition={{ type: "spring", stiffness: 500, damping: 30 }}
             style={{
-              width: itemWidth || 100, // fallback width
+              width: itemWidth || 100,
               background: "linear-gradient(to top, #97D7F9, #4F46E5)",
             }}
           />
@@ -373,8 +312,8 @@ function Wingo() {
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
-              className={`flex justify-around items-center cursor-pointer transition-all duration-500 border
-              max-w-24 max-h-full p-5 rounded-3xl drop-shadow-[1px_2px_0_#0e2a47]`}
+              className={`flex justify-around items-center cursor-pointer transition-all duration-500
+              max-w-full max-h-full p-6 rounded-3xl drop-shadow-[1px_2px_0_#0e2a47]`}
               onClick={() => setActiveIndex(index)}
             >
               <div className="flex flex-col justify-center items-center">
@@ -386,7 +325,7 @@ function Wingo() {
                   alt="clock"
                 />
 
-                <span className="text-white text-[clamp(0.650rem,2vw,0.750rem)] font-paytone flex flex-col items-center z-10">
+                <span className="text-white text-[clamp(0.250rem,2vw,0.750rem)] font-paytone flex flex-col items-center z-10">
                   <span className="font-paytone">Win Go</span>
                   <span className="font-paytone">{timeLabels[index]}</span>
                 </span>
@@ -510,7 +449,7 @@ function Wingo() {
               onClick={() => {
                 setShowModal(true);
                 setBallColor(["#9B48DB"]);
-                // setBallNumber(null);
+                setBallNumber(null);
               }}
             >
               Violet
@@ -540,7 +479,8 @@ function Wingo() {
             <div className="grid grid-cols-5 grid-rows-2 gap-2 drop-shadow-[1px_4px_0_#0e2a47] ">
               {numberBallIcons.map((num, idx) => (
                 <img
-                  key={num}
+                  role="button"
+                  key={`num-${idx}`}
                   src={num}
                   alt={`num-${idx}`}
                   className={`h-auto min-w-8 transition-transform duration-300 ease-in-out 
