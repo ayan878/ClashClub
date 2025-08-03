@@ -230,11 +230,14 @@ function Wingo() {
             backgroundImage: `url(${walletBg})`,
           }}
         >
-          <div className="flex justify-center items-center mb-2 drop-shadow-[1px_2px_0_grey]">
-            <span className="text-2xl text-white font-paytone mr-2">
+          <div className="flex justify-center items-center mb-2 drop-shadow-[1px_2px_0_#0e2a47]">
+            <span className="text-2xl text-white font-paytone mr-2 drop-shadow-[1px_2px_0_grey]">
               ₹ {showBalance}
             </span>
-            <Repeat size={20} className="cursor-pointer" />
+            <Repeat
+              size={20}
+              className="cursor-pointer drop-shadow-[1px_2px_0_grey]"
+            />
           </div>
           <div className="flex justify-center align-items-center mb-2 gap-1 drop-shadow-[1px_2px_0_#0e2a47]">
             <Wallet className="w-8 h-8 drop-shadow-[1px_2px_0_#0e2a47]" />
@@ -313,7 +316,7 @@ function Wingo() {
             <div
               key={index}
               className={`flex justify-around items-center cursor-pointer transition-all duration-500
-              max-w-full max-h-full p-6 rounded-3xl drop-shadow-[1px_2px_0_#0e2a47]`}
+              max-w-full max-h-full p-6 rounded-3xl drop-shadow-[1px_1px_0_#0e2a47]`}
               onClick={() => setActiveIndex(index)}
             >
               <div className="flex flex-col justify-center items-center">
@@ -325,7 +328,7 @@ function Wingo() {
                   alt="clock"
                 />
 
-                <span className="text-white text-[clamp(0.250rem,2vw,0.750rem)] font-paytone flex flex-col items-center z-10">
+                <span className="text-white text-[clamp(0.250rem,2vw,0.750rem)] font-paytone flex flex-col items-center z-10 drop-shadow-[1px_1px_0_grey]">
                   <span className="font-paytone">Win Go</span>
                   <span className="font-paytone">{timeLabels[index]}</span>
                 </span>
@@ -342,14 +345,6 @@ function Wingo() {
               "inset 0 2px 0px rgba(0, 255, 255, 0.5), inset 0 -2px 0px rgba(0, 255, 255, 0.5)",
           }}
         >
-          {/* <div
-            class="w-40 h-15 bg-indigo-500 rounded-t-full border-t-8 border-l-8 border-r-8"
-            style={{
-              boxShadow:
-                "inset 0 2px 2px rgba(0, 255, 255, 0.5), inset 0 -2px 2px rgba(0, 255, 255, 0.5)",
-            }}
-          ></div> */}
-
           <span
             className="absolute -top-[7.85px] rotate-180 left-1/2 -translate-x-1/2 bg-[#0e2a47] z-10 w-10 h-5 rounded-t-full border-t-7 border-l-7 border-r-7"
             style={{
@@ -362,16 +357,16 @@ function Wingo() {
           <span className="absolute w-10 h-5 rotate-180  left-1/2 -translate-x-1/2 -bottom-2 bg-[#0e2a47] rounded-b-full border-b-8 border-l-8 border-r-8 z-10" />
 
           {/* Left section */}
-          <div className="flex flex-col gap-2 drop-shadow-[1px_2px_0_#0e2a47]">
+          <div className="flex flex-col gap-2 drop-shadow-[1px_1px_0_#0e2a47]">
             {/* How to play badge + timer */}
             <div className="flex items-center gap-1 px-2 py-1 rounded-full border border-white text-xs w-max">
               <PiNewspaperClippingFill />
-              <span className="drop-shadow-[1px_2px_0_#0e2a47]">
+              <span className="drop-shadow-[1px_1px_0_grey]">
                 How to play
               </span>
             </div>
 
-            <span className="text-sm drop-shadow-[1px_2px_0_#0e2a47]">
+            <span className="text-sm drop-shadow-[1px_2px_0_grey]">
               Win Go {timeLabels[activeIndex]}
             </span>
 
@@ -385,7 +380,7 @@ function Wingo() {
 
           {/* Right section */}
           <div className="flex flex-col items-end text-right gap-1 drop-shadow-[1px_2px_0_#0e2a47]">
-            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)] drop-shadow-[1px_2px_0_#0e2a47]">
+            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1.125rem)] drop-shadow-[1px_2px_0_grey]">
               Time remaining
             </span>
             <div className="flex gap-1 font-mono">
