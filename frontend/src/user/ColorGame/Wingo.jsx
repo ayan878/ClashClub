@@ -158,7 +158,6 @@ function Wingo() {
     if (seconds <= 5) setShowModal(false);
   }, [seconds]);
 
-
   const handleNumberBalls = (idx) => {
     setShowModal(true);
     if (idx !== ballNumber) setBallNumber(idx);
@@ -201,8 +200,8 @@ function Wingo() {
       ? "drop-shadow-[-1px_0px_0_#0e2a47]"
       : "drop-shadow-[1px_0px_0_#0e2a47]";
 
-      console.log('Ayan');
-      
+  console.log("Ayan");
+
   return (
     // <div className="w-full-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
 
@@ -514,9 +513,14 @@ function Wingo() {
             </div>
           </div>
 
-          <div className="flex border-0 rounded-full overflow-hidden">
+          <div className="flex border-0 rounded-full overflow-hidden px-2 py-1">
+            {" "}
             <button
-              className="text-white text-md w-full p-2 border-0 bg-gradient-to-b from-yellow-700 via-yellow-400 to-yellow-700"
+              className="text-white font-semibold text-md w-full px-4 py-3 rounded-l-full 
+  bg-gradient-to-b from-yellow-500 via-yellow-300 to-yellow-600
+  shadow-[inset_0_-2px_4px_rgba(255,255,255,0.2),0_4px_0_rgba(0,0,0,0.4)]
+  active:translate-y-[2px] active:shadow-[inset_0_-2px_4px_rgba(255,255,255,0.1),0_2px_0_rgba(0,0,0,0.3)]
+  transition-all duration-150 ease-in-out"
               onClick={() => {
                 setShowModal(true);
                 setBallColor(["#DD9138"]);
@@ -525,13 +529,17 @@ function Wingo() {
               Big
             </button>
             <button
-              className="text-white text-md w-full p-2 border-0 bg-gradient-to-b from-indigo-950 via-indigo-400 to-indigo-950"
+              className="text-white font-semibold text-md w-full px-4 py-3 rounded-r-full 
+  bg-gradient-to-b from-indigo-800 via-indigo-500 to-indigo-900
+  shadow-[inset_0_-2px_4px_rgba(255,255,255,0.2),0_4px_0_rgba(0,0,0,0.4)]
+  active:translate-y-[2px] active:shadow-[inset_0_-2px_4px_rgba(255,255,255,0.1),0_2px_0_rgba(0,0,0,0.3)]
+  transition-all duration-150 ease-in-out"
               onClick={() => {
                 setShowModal(true);
                 setBallColor(["#5088D3"]);
               }}
             >
-              Small
+              Small{" "}
             </button>
           </div>
         </div>
