@@ -20,7 +20,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Repeat, Wallet } from "lucide-react";
 import { PiNewspaperClippingFill } from "react-icons/pi";
-import { socket } from "@/socket";
+import socket from "@/socket";
 import NeuButton from "@/components/ui/NeuButton";
 import TimerModal from "../components/TimerModal";
 import WingoResultModal from "../components/WingoResultModal";
@@ -110,10 +110,6 @@ function Wingo() {
   // extract all the value in single line of code
   const { number, color, size, period } = timers[durations[activeIndex]] ?? {};
 
-  const gameType = `Wingo-${
-    [durations[activeIndex]] / 60 === 0.5 ? "30" : [durations[activeIndex]] / 60
-  }`;
-
   // console.log(gameType);
 
   useEffect(() => {
@@ -134,7 +130,7 @@ function Wingo() {
     );
   }, []);
 
-  // console.log(timers);
+
 
   useEffect(() => {
     if (!startToGenerateNumber) return;
@@ -206,17 +202,13 @@ function Wingo() {
       ? "drop-shadow-[-1px_0px_0_#0e2a47]"
       : "drop-shadow-[1px_0px_0_#0e2a47]";
 
+
+
   return (
     // <div className="w-full-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
 
     <div className="relative w-full max-w-screen-sm mx-auto p-4 overflow-y-auto bg-[#22275B]">
-      <WingoResultModal
-        number={number}
-        color={color}
-        size={size}
-        setIsOpen={setIsOpen}
-        isOpen={isOpen}
-      />
+      <WingoResultModal duration={durations[activeIndex]}/>
 
       <div className="relative flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
         <WingoBetModal
@@ -226,8 +218,8 @@ function Wingo() {
           ballColor={ballColor}
           ballNumber={ballNumber}
           size={size}
-          gameType={gameType}
           period={period}
+          duration={durations[activeIndex]}
           setShowModal={setShowModal}
         />
         {/* balance section */}

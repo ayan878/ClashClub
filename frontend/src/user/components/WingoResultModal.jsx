@@ -1,21 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import resultImg from "../../assets/png/resultBg.png";
 import resultCup from "../../assets/png/winner-cup.png";
+import socket from "@/socket";
 
-const WingoResultModal = ({ isOpen,number, color, size }) => {
- 
- useEffect(() => {
-   if (!isOpen) return; 
+const WingoResultModal = ({ duration }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [number, setNumber] = useState(null);
+  const [color, setColor] = useState(null);
+  const [period, setPeriod] = useState(null);
+  const [size, setSize] = useState(null);
 
-   const timer = setTimeout(() => {
-     setIsOpen(false);
-   }, 2000);
+  useEffect(() => {
+    socket.on("wingo-result", (result) => {
+      console.log("result:", result);
+      setNumber(result.number);
+      setColor(result.color);
+      setSize(result.size);
+      setPeriod(result.period);    
+      setIsOpen(result.game === duration);
+    });
 
-   return () => clearTimeout(timer);
- }, [isOpen]);
+    if (!isOpen) return;
+    const timer = setTimeout(() => {
+      setIsOpen(false);
+    }, 2000);
 
+    return () => clearTimeout(timer);
+  }, [isOpen]);
 
-  if (!isOpen || !color || !number || !size) return null;
+  if (!isOpen) return null;
 
   //   const colorText = color.length > 1 ? color.join(" & ") : color[0];
 

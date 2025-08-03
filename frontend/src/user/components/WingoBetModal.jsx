@@ -1,4 +1,4 @@
-import { socket } from "@/socket";
+import  socket  from "@/socket";
 import { useState } from "react";
 import { toast } from "react-toastify";
 // import axios from "axios";
@@ -11,9 +11,8 @@ const WingoBetModal = ({
   ballColor,
   ballNumber,
   title,
-  gameType,
   period,
-  // size,
+  duration,
   setShowModal,
 }) => {
   const [balance, setBalance] = useState(1);
@@ -40,6 +39,12 @@ const WingoBetModal = ({
         : "";
   }
 
+    const gameType = `Wingo-${
+      duration / 60 === 0.5
+        ? "30"
+        : duration / 60
+    }`;
+    
   if (!isOpen) return null;
 
   const handleBetSubmit = async (
@@ -47,6 +52,7 @@ const WingoBetModal = ({
     definedColor,
     number,
     size,
+    duration,
     totalAmount,
     period
   ) => {
@@ -62,7 +68,6 @@ const WingoBetModal = ({
       size: size || null,
       totalAmount,
     });
-
 
     if (!number && !definedColor && !size) {
       return alert("Please bet on at least one: Number, Color, or Size");
@@ -88,6 +93,11 @@ const WingoBetModal = ({
 
       if (response.ok && data.success) {
         toast.success("Bet placed successfully!");
+        socket.emit("wingo-bet", {
+          period,
+          duration,
+          userId: socket.id,
+        });
         setShowModal(false);
       } else {
         toast.error(data?.message || "Bet submission failed");
@@ -252,6 +262,7 @@ const WingoBetModal = ({
                 definedColor,
                 ballNumber,
                 size,
+                duration,
                 totalAmount,
                 period
               )
