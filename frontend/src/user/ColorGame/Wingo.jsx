@@ -357,13 +357,11 @@ function Wingo() {
           <span className="absolute w-10 h-5 rotate-180  left-1/2 -translate-x-1/2 -bottom-2 bg-[#0e2a47] rounded-b-full border-b-8 border-l-8 border-r-8 z-10" />
 
           {/* Left section */}
-          <div className="flex flex-col gap-2 drop-shadow-[1px_1px_0_#0e2a47]">
+          <div className="flex flex-col gap-2 drop-shadow-[1px_2px_0_#0e2a47]">
             {/* How to play badge + timer */}
             <div className="flex items-center gap-1 px-2 py-1 rounded-full border border-white text-xs w-max">
-              <PiNewspaperClippingFill />
-              <span className="drop-shadow-[1px_1px_0_grey]">
-                How to play
-              </span>
+              <PiNewspaperClippingFill className="drop-shadow-[1px_1px_0_grey]" />
+              <span className="drop-shadow-[1px_1px_0_grey]">How to play</span>
             </div>
 
             <span className="text-sm drop-shadow-[1px_2px_0_grey]">
