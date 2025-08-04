@@ -422,14 +422,14 @@ function Wingo() {
               "inset 0 2px 0px rgba(0, 255, 255, 0.5), inset 0 -2px 0px rgba(0, 255, 255, 0.5)",
           }}
         >
-          {Array.from({ length: 4 }).map(
+          {/* {Array.from({ length: 4 }).map(
             (_, index) =>
               activeIndex === index && (
                 <div key={index}>
                   <TimerModal seconds={seconds} />
                 </div>
               )
-          )}
+          )} */}
 
           {/* game control btns */}
           <div className="w-full mx-auto flex flex-wrap justify-between items-center gap-2 mb-3">
@@ -468,7 +468,7 @@ function Wingo() {
                 "inset 0 2px 0px rgba(0, 255, 255, 0.5), inset 0 -2px 0px rgba(0, 255, 255, 0.5)",
             }}
           >
-            <div className="grid grid-cols-5 grid-rows-2 gap-2 drop-shadow-[1px_4px_0_#0e2a47] ">
+            <div className="grid grid-cols-5 grid-rows-2 gap-2 drop-shadow-[1px_4px_0_#0e2a47]">
               {numberBallIcons.map((num, idx) => (
                 <img
                   role="button"
@@ -509,7 +509,6 @@ function Wingo() {
           </div>
 
           <div className="flex border-0 rounded-full overflow-hidden px-2 py-1">
-            {" "}
             <button
               className="text-white font-semibold text-md w-full px-4 py-3 rounded-l-full 
   bg-gradient-to-b from-yellow-500 via-yellow-300 to-yellow-600
@@ -541,14 +540,14 @@ function Wingo() {
         {/* Tabs */}
         <div className="w-full flex justify-between items-center">
           <button
-            className="bg-blue-600 text-white text-lg border-none px-3 py-2 rounded-md"
+            className="bg-blue-600 text-white text-lg border-none px-3 py-2 rounded-md drop-shadow-[3px_3px_0_#1E1D5F]"
             // onClick={() => setActiveTab("history")}
           >
             Game History
           </button>
           <button
-            className="text-white text-lg px-3 py-2 border-none w-1/2 rounded-md"
-            style={{ backgroundColor: "rgba(29, 24, 97, 0.67)" }}
+            className="text-white text-lg px-3 py-2 border-none w-1/2 rounded-md drop-shadow-[3px_3px_0_black]"
+            style={{ backgroundColor: "rgb(29, 24, 97)" }}
             // onClick={() => setActiveTab("bets")}
           >
             My Bets

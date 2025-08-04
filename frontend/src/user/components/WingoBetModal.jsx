@@ -109,7 +109,7 @@ const WingoBetModal = ({
 
   return (
     <div
-      className="fixed inset-0 flex justify-center items-end bg-transparent  z-10 rounded-md drop-shadow-[1px_4px_0_#0e2a47]"
+      className="fixed inset-0 flex justify-center items-end bg-transparent  z-50 rounded-md drop-shadow-[1px_4px_0_#0e2a47]"
       style={{
         borderRadius: "inherit",
         backgroundColor: "rgba(0, 0, 0, 0.5)",

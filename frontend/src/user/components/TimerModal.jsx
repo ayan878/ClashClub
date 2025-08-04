@@ -1,38 +1,19 @@
-const TimerModal = ({ seconds,activeIndex,setActiveIndex }) => {
-
-  
-  if (seconds > 5 ) return null;
+const TimerModal = ({ seconds }) => {
+  if (seconds > 5) return null;
 
   return (
-    <div
-      className="absolute start-0 top-0 w-full h-full flex justify-center items-center rounded-lg"
-      style={{
-        backgroundColor: "rgba(0, 0, 0, 0.75)",
-        zIndex: 10,
-      }}
-    >
-      <span className="inline-grid grid-cols-2 gap-4">
-        <span
-          className="flex flex-col justify-center items-center max-w-50 max-h-75 p-4 rounded text-white text-[50vw]  bg-indigo-600"
-          style={{
-            fontSize: "12rem",
-            fontWeight: "900",
-            // backgroundColor: "rgb(22, 30, 79)",
-          }}
-        >
-          {seconds[0]}
-        </span>
-        <span
-          className="flex flex-col justify-center items-center max-w-50 max-h-75 p-4 rounded text-white text-[50vw]  bg-indigo-600"
-          style={{
-            fontSize: "12rem",
-            fontWeight: "900",
-            // backgroundColor: "rgb(22, 30, 79)",
-          }}
-        >
-          {seconds[1]}
-        </span>
-      </span>
+    <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/75">
+      <div className="grid grid-cols-2 gap-6">
+        {[seconds[0], seconds[1]].map((digit, i) => (
+          <div
+            key={i}
+            className="flex justify-center items-center bg-indigo-600 text-white font-extrabold rounded-lg
+                       text-[clamp(4rem,24vw,20rem)] w-[clamp(6rem,24vw,24rem)] h-[clamp(6rem,50vw,56rem)]"
+          >
+            {digit}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
