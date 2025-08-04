@@ -26,6 +26,7 @@ import TimerModal from "../components/TimerModal";
 import WingoResultModal from "../components/WingoResultModal";
 import WingoBetModal from "../components/WingoBetModal";
 import { motion } from "framer-motion";
+import WingoHistoryTable from "../components/WingoHistoryTable";
 
 const timeLabels = ["30 Sec", "1 Min", "3 Min", "5 Min"];
 const ballIcons = [rvIcon, g3Icon, r4Icon, gvIcon];
@@ -553,6 +554,7 @@ function Wingo() {
             My Bets
           </button>
         </div>
+        <WingoHistoryTable/>
       </div>
     </div>
   );

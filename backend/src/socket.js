@@ -181,7 +181,9 @@ export const socketHandlers = (io) => {
         timer.timeLeft--;
       } else {
         const { number, color, size } = generateResult();
-        const gameType = `Wingo${duration}`;
+        const gameType = `Wingo-${
+          duration / 60 === 0.5 ? "30Sec" : duration / 60 + "Min"
+        }`;
         const time = new Date();
         const resultPeriod = timer.period;
 

@@ -7,9 +7,8 @@ import cors from "cors";
 import http from "http";
 import { Server } from "socket.io";
 import morgan from "morgan";
-import otpRouter from "./routes/otpSendRoute.js";
 import { socketHandlers } from "./socket.js";
-import router from "./routes/IndexRoutes.js";
+import router from "./routes/routes.js";
 
 dotenv.config();
 
@@ -42,7 +41,7 @@ socketHandlers(io);
 app.use(express.json());
 app.use(morgan("dev"));
 app.use("/api", router);
-app.use(otpRouter);
+
 
 
 // Define route to fetch users with total_money >= 100
