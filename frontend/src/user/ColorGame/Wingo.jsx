@@ -203,12 +203,10 @@ function Wingo() {
   console.log("Ayan");
 
   return (
-    // <div className="w-full-md flex flex-col justify-center items-center mx-auto py-2 border bg-[#22275B]">
-
-    <div className="relative w-full max-w-screen-sm mx-auto p-4 overflow-y-auto bg-[#22275B]">
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-[#22275B]">
       <WingoResultModal duration={durations[activeIndex]} />
 
-      <div className="relative flex flex-col justify-center items-center gap-4 mx-2 font-paytone">
+      <div className="relative flex flex-col justify-center items-center gap-4 mx-2 font-paytone sm:mx-auto sm:w-full sm:max-w-sm">
         <WingoBetModal
           isOpen={showModal}
           // timer={seconds}
@@ -292,9 +290,10 @@ function Wingo() {
           </button>
         </div>
 
+        {/* timer */}
         <div
           ref={containerRef}
-          className="relative flex justify-between items-center w-full bg-regal-blue h-32 rounded-4xl shadow-2xl shadow-accent-foreground border-8 drop-shadow-[1px_2px_0_#0e2a47] overflow-clip"
+          className="relative grid grid-cols-4 justify-between items-center w-full bg-regal-blue rounded-4xl shadow-2xl border-8 overflow-hidden drop-shadow-[1px_2px_0_#0e2a47]"
           style={{
             boxShadow:
               "inset 0 2px 0px rgba(0, 255, 255, 0.5), inset 0 -2px 0px rgba(0, 255, 255, 0.5)",
@@ -315,21 +314,21 @@ function Wingo() {
             <div
               key={index}
               className={`flex justify-around items-center cursor-pointer transition-all duration-500
-              max-w-full max-h-full p-5 rounded-3xl drop-shadow-[1px_1px_0_#0e2a47]`}
+        max-w-full p-4 sm:p-5 rounded-3xl drop-shadow-[1px_1px_0_#0e2a47]`}
               onClick={() => setActiveIndex(index)}
             >
-              <div className="flex flex-col justify-center items-center">
+              <div className="flex flex-col justify-center items-center space-y-1">
                 <img
-                  className="drop-shadow-lg"
-                  src={`${
-                    activeIndex === index ? clockLightIcon : clockDeepIcon
-                  }`}
+                  className="drop-shadow-lg w-8 h-8 sm:w-12 sm:h-12"
+                  src={activeIndex === index ? clockLightIcon : clockDeepIcon}
                   alt="clock"
                 />
 
-                <span className="text-white text-[clamp(0.250rem,2vw,0.750rem)] font-paytone flex flex-col items-center z-10 drop-shadow-[1px_1px_0_grey]">
-                  <span className="font-paytone">Win Go</span>
-                  <span className="font-paytone">{timeLabels[index]}</span>
+                <span className="text-white text-[clamp(0.5rem,2vw,0.875rem)] font-paytone flex flex-col items-center z-10 drop-shadow-[1px_1px_0_grey]">
+                  <span className="font-paytone leading-none">Win Go</span>
+                  <span className="font-paytone leading-none">
+                    {timeLabels[index]}
+                  </span>
                 </span>
               </div>
             </div>
@@ -361,49 +360,53 @@ function Wingo() {
           />
 
           {/* Left section */}
-          <div className="flex flex-col gap-2 drop-shadow-[1px_2px_0_#0e2a47]">
+          <div className="w-1/2 sm:w-auto flex flex-col flex-wrap gap-2 text-xs drop-shadow-[1px_2px_0_#0e2a47]">
             {/* How to play badge + timer */}
-            <div className="flex items-center gap-1 px-2 py-1 rounded-full border border-white text-xs w-max">
+            <div className="flex flex-wrap items-center gap-1 px-2 py-1 rounded-full border border-white max-w-fit sm:w-auto">
               <PiNewspaperClippingFill className="drop-shadow-[1px_1px_0_grey]" />
               <span className="drop-shadow-[1px_1px_0_grey]">How to play</span>
             </div>
 
-            <span className="text-sm drop-shadow-[1px_2px_0_grey]">
+            <span className="drop-shadow-[1px_1px_0_grey]">
               Win Go {timeLabels[activeIndex]}
             </span>
 
             {/* Ball icons */}
-            <div className="flex gap-1 mt-2">
+            <div className="flex flex-wrap gap-1 mt-2">
               {ballIcons.map((icon, index) => (
-                <img key={index} src={icon} alt="ball" className="max-w-8" />
+                <img
+                  key={index}
+                  src={icon}
+                  alt="ball"
+                  className="h-5 sm:max-h-10 w-auto"
+                />
               ))}
             </div>
           </div>
 
           {/* Right section */}
-          <div className="flex flex-col items-end text-right gap-1 drop-shadow-[1px_2px_0_#0e2a47]">
-            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1rem)] drop-shadow-[1px_1px_0_grey]">
+          <div className="w-1/2 flex flex-col items-end text-right gap-1 drop-shadow-[1px_2px_0_#0e2a47]">
+            <span className="font-paytone text-sm drop-shadow-[1px_1px_0_grey]">
               Time remaining
             </span>
-            <div className="flex gap-1 font-mono">
-              <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
-                {minutes[0]}
-              </span>
-
-              <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
-                {minutes[1]}
-              </span>
-              <span className="text-white flex flex-col justify-center items-center text-3xl">
-                :
-              </span>
-              <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
-                {seconds[0]}
-              </span>
-              <span className="bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white text-3xl">
-                {seconds[1]}
-              </span>
+            <div className="grid grid-cols-5 gap-1 font-mono">
+              {[minutes[0], minutes[1], ":", seconds[0], seconds[1]].map(
+                (char, idx) => (
+                  <span
+                    key={idx}
+                    className={`${
+                      char === ":"
+                        ? "text-white flex flex-col justify-center items-center"
+                        : "bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white"
+                    } text-3xl max-xs:text-2xl`}
+                  >
+                    {char}
+                  </span>
+                )
+              )}
             </div>
-            <span className="font-paytone text-[clamp(0.875rem,4.5vw,1rem)] drop-shadow-[1px_1px_0_grey]">
+
+            <span className="font-paytone text-sm drop-shadow-[1px_1px_0_grey]">
               {period}
             </span>
           </div>
