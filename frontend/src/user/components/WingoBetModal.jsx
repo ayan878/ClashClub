@@ -11,7 +11,6 @@ const WingoBetModal = ({
   ballColor,
   ballNumber,
   period,
-  title,
   duration,
   setShowModal,
 }) => {
@@ -141,7 +140,7 @@ const WingoBetModal = ({
             }}
           >
             <h3 className="text-lg font-semibold drop-shadow-[1px_4px_0_#0e2a47]">
-              {title}
+              {gameType}
             </h3>
             <p className="text-sm drop-shadow-[1px_1px_0_#0e2a47]">
               Select{" "}
