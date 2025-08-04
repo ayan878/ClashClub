@@ -243,16 +243,17 @@ function Wingo() {
               Main Wallet
             </span>
           </div>
-          <div className="min-w-64 flex justify-center items-center gap-6">
+
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 w-full max-w-sm mx-auto">
             <Link
               to="/withdraw"
-              className="bg-red-500 px-4 py-2 font-bold rounded-full text-white w-4/5 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
+              className="bg-red-500 px-4 py-2 text-xs sm:text-base font-bold rounded-full text-white w-5/12 sm:w-4/12 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
               Withdraw
             </Link>
             <Link
               to="/deposit"
-              className="bg-green-500 px-4 py-2 font-bold rounded-full text-decoration-none text-white w-4/5 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
+              className="bg-green-500 px-4 py-2 text-sm sm:text-base font-bold rounded-full text-white w-5/12 sm:w-4/12 transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]"
             >
               Deposit
             </Link>
@@ -397,8 +398,8 @@ function Wingo() {
                     className={`${
                       char === ":"
                         ? "text-white flex flex-col justify-center items-center"
-                        : "bg-indigo-500 flex flex-col items-center justify-center rounded w-6 h-10 p-2 text-center text-white"
-                    } text-3xl max-xs:text-2xl`}
+                        : "bg-indigo-500 flex flex-col items-center justify-center rounded w-5 h-8 p-2 text-center text-white"
+                    } text-2xl`}
                   >
                     {char}
                   </span>
@@ -414,7 +415,7 @@ function Wingo() {
 
         {/* game control */}
         <div
-          className="relative w-full flex flex-col justify-between mb-3 rounded-2xl p-2 border-8 drop-shadow-[1px_2px_0_#0e2a47]"
+          className="relative flex flex-col justify-between mb-3 rounded-2xl p-2 border-8 drop-shadow-[1px_2px_0_#0e2a47]"
           style={{
             backgroundColor: "#2B3270",
             boxShadow:
@@ -431,21 +432,16 @@ function Wingo() {
           )}
 
           {/* game control btns */}
-          <div className="w-full flex justify-between items-center gap-2 mb-3">
+          <div className="w-full mx-auto flex flex-wrap justify-between items-center gap-2 mb-3">
             <NeuButton
-              className="w-24 bg-green-500 text-md border-0 text-white p-2 rounded-bl-[1rem] rounded-tr-[1rem]"
+              className="w-[30%] min-w-[5rem] bg-green-500 text-sm sm:text-md border-0 text-white py-2 px-1 rounded-bl-[1rem] rounded-tr-[1rem]"
               name="Green"
               setShowModal={setShowModal}
               setBallColor={setBallColor}
-              // onClick={() => {
-              //   setShowModal(true);
-              //   alert("showModal")
-              //   setBallColor(["#1AB355"]);
-              //   setBallNumber(null);
-              // }}
             />
+
             <button
-              className="flex-1 rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
+              className="flex-1 min-w-[30%] rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-3 py-2 text-sm sm:text-md text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 transition-all hover:ring-offset hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70"
               onClick={() => {
                 setShowModal(true);
                 setBallColor(["#9B48DB"]);
@@ -454,16 +450,12 @@ function Wingo() {
             >
               Violet
             </button>
+
             <NeuButton
-              className="w-24 bg-red-500 text-md border-0 text-white p-2 rounded-tl-[1rem] rounded-br-[1rem]"
+              className="w-[30%] min-w-[5rem] bg-red-500 text-sm sm:text-md border-0 text-white py-2 px-1 rounded-tl-[1rem] rounded-br-[1rem]"
               name="Red"
               setShowModal={setShowModal}
               setBallColor={setBallColor}
-              // onClick={() => {
-              //   setShowModal(true);
-              //   setBallColor(["#D23838"]);
-              //   setBallNumber(null);
-              // }}
             />
           </div>
 
